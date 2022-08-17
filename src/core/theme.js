@@ -39,7 +39,10 @@ export const theme = createTheme({
     }
   },
   palette: {
-    appbarColor: 'white'
+    appbarColor: 'white',
+    background: {
+      default: '#F3F3F3'
+    }
   }
 });
 
