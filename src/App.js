@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/layouts/Layout";
 import AkunPage from "./pages/akun";
+import LoginPage from "./pages/auth/Login";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path="buku-besar" element={<>BUKU BESAR</>} />
           <Route path="neraca-saldo" element={<>NERACA SALDO</>} />
         </Route>
-        {/* <Route path="/login" element={<PAGES.LoginPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<>HALAMAN TIDAK ADA.</>} />
       </Routes>
     </Router>
