@@ -55,6 +55,7 @@ function AkunPage() {
           <TableWrapper headers={akun?.akun?.head} align="center">
             {akun?.akun?.data?.map((data, index) => (
               <AkunTable
+                key={index}
                 akun={akun}
                 data={data}
                 index={index}
