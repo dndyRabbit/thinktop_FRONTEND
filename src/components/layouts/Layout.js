@@ -8,10 +8,19 @@ import ThemeConfig from "../../core/theme";
 import Navbar from "./Navbar";
 import DrawerApp from "./Drawer";
 import useDrawer from "../../core/hooks/useDrawer";
+import { useDispatch } from "react-redux";
+import { getAkun } from "../../core/redux/actions/akun.action";
 
-function Layout (props) {
+function Layout(props) {
   const { container, drawerWidth, mobileOpen, handleDrawerToggle } =
     useDrawer(props);
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(getAkun());
+  }, []);
+
   return (
     <ThemeProvider theme={ThemeConfig}>
       <Box sx={{ display: "flex" }}>
@@ -36,7 +45,7 @@ function Layout (props) {
         </Box>
       </Box>
     </ThemeProvider>
-  )
-};
+  );
+}
 
 export default Layout;

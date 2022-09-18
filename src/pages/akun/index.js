@@ -7,17 +7,36 @@ import {
   TableRow,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+
 import { TableWrapper } from "../../components/shared/Table";
 import TitleCard from "../../components/shared/TitleCard";
-
-const HeaderTableAkun = [
-  { title: "No" },
-  { title: "Nama" },
-  { title: "Kode" },
-  { title: "Aksi" },
-];
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { LoadingButton } from "@mui/lab";
+import { deleteAkun } from "../../core/redux/actions/akun.action";
+import Swal from "sweetalert2";
+import { confirmation, error } from "../../components/shared/Notification";
+import AkunTable from "../../components/Akun/Akun.table";
 
 function AkunPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { akun } = useSelector((state) => state);
+
+  const handleDelete = async ({ uuid_akun }) => {
+    await confirmation(
+      "Apakah kamu yakin ingin menghapus akun?",
+      "Data tidak bisa dikembalikan!"
+    ).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAkun({ uuid_akun }));
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+  };
+
   return (
     <Box sx={{ p: 3 }}>
       <Card elevation={0}>
@@ -27,18 +46,21 @@ function AkunPage() {
             variant="contained"
             disableElevation
             endIcon={<AddIcon />}
+            onClick={() => navigate("tambah")}
           >
             TAMBAH
           </Button>
         </TitleCard>
         <CardContent>
-          <TableWrapper headers={HeaderTableAkun} align="center">
-            <TableRow>
-              <TableCell align="center">1</TableCell>
-              <TableCell align="center">Bank Mandiri</TableCell>
-              <TableCell align="center">00001</TableCell>
-              <TableCell align="center"></TableCell>
-            </TableRow>
+          <TableWrapper headers={akun?.akun?.head} align="center">
+            {akun?.akun?.data?.map((data, index) => (
+              <AkunTable
+                akun={akun}
+                data={data}
+                index={index}
+                handleDelete={handleDelete}
+              />
+            ))}
           </TableWrapper>
         </CardContent>
       </Card>

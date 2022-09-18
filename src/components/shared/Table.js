@@ -22,7 +22,7 @@ export const Header = ({ data, align }) => {
       <TableRow>
         {data.map((headerValue, keyHeader) => (
           <TableCell align={align ?? "left"} key={keyHeader}>
-            {headerValue.title ?? ""}
+            {headerValue ?? ""}
           </TableCell>
         ))}
       </TableRow>
@@ -42,6 +42,6 @@ export const TableWrapper = ({ headers, children, align }) => {
 };
 
 TableWrapper.propTypes = {
-  headers: PropTypes.array.isRequired,
+  // headers: PropTypes.array.isRequired,
   align: PropTypes.string,
 };
