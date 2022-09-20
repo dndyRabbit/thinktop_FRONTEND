@@ -37,7 +37,7 @@ const TambahAkunPage = () => {
   };
 
   const onSubmit = async () => {
-    if (data.kode_akun == "" && data.nama_akun == "") {
+    if (data.kode_akun == "" || data.nama_akun == "") {
       await warning("Data akun tidak boleh kosong.");
     } else {
       dispatch(postAkun({ data, setData, initialState, navigate }));
