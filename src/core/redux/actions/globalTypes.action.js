@@ -4,10 +4,10 @@ export const GLOBALTYPES = {
 };
 
 export const DeleteData = (data, id) => {
-  console.log(data, "DATA IN GLOBAL");
-  console.log(id, "ID IN GLOBAL");
+  // console.log(data, "DATA IN GLOBAL");
+  // console.log(id, "ID IN GLOBAL");
   const newData = data.filter((item) => item.uuid !== id);
-  console.log(newData, " new DATA IN GLOBAL");
+  // console.log(newData, " new DATA IN GLOBAL");
   return newData;
 };
 

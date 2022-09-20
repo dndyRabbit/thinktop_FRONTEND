@@ -9,6 +9,9 @@ import Layout from "../../components/layouts/Layout";
 import AkunPage from "../../pages/akun";
 import LoginPage from "../../pages/auth/Login";
 import TambahAkunPage from "../../pages/akun/tambahAkun.page";
+import JurnalUmumPage from "../../pages/jurnalUmum";
+import TambahJurnalPage from "../../pages/jurnalUmum/tambahJurnal.page";
+import DetailJurnal from "../../pages/jurnalUmum/detailJurnal.page";
 
 const MainRoutes = () => {
   return (
@@ -20,7 +23,9 @@ const MainRoutes = () => {
           <Route path="profil" element={<>PROFIL</>} />
           <Route path="akun" element={<AkunPage />} />
           <Route path="akun/tambah" element={<TambahAkunPage />} />
-          <Route path="jurnal-umum" element={<>JURNAL UMUM</>} />
+          <Route path="jurnal-umum" element={<JurnalUmumPage />} />
+          <Route path="jurnal-umum/tambah" element={<TambahJurnalPage />} />
+          <Route path="jurnal-umum/:waktu" element={<DetailJurnal />} />
           <Route path="buku-besar" element={<>BUKU BESAR</>} />
           <Route path="neraca-saldo" element={<>NERACA SALDO</>} />
         </Route>
