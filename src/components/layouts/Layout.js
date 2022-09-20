@@ -10,6 +10,7 @@ import DrawerApp from "./Drawer";
 import useDrawer from "../../core/hooks/useDrawer";
 import { useDispatch } from "react-redux";
 import { getAkun } from "../../core/redux/actions/akun.action";
+import { getJurnal } from "../../core/redux/actions/jurnal.action";
 
 function Layout(props) {
   const { container, drawerWidth, mobileOpen, handleDrawerToggle } =
@@ -19,6 +20,7 @@ function Layout(props) {
 
   React.useEffect(() => {
     dispatch(getAkun());
+    dispatch(getJurnal());
   }, []);
 
   return (
