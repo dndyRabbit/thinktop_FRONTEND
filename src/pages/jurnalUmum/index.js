@@ -4,7 +4,7 @@ import { Box, Card, CardContent, TextField, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { TableWrapper } from "../../components/shared/Table";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoadingButton } from "@mui/lab";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -12,17 +12,23 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import JurnalTable from "../../components/JurnalUmum/Jurnal.table";
 import Title from "../../components/JurnalUmum/Title";
+import { getJurnal } from "../../core/redux/actions/jurnal.action";
 
 function JurnalUmumPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { jurnal } = useSelector((state) => state);
 
-  const [waktu, setWaktu] = React.useState(dayjs());
-  const [filterDate, setFilterDate] = React.useState(null);
+  const [filterDate, setFilterDate] = React.useState(dayjs());
 
   const handleNavToDetail = (waktu) => {
     navigate(`/jurnal-umum/${waktu}`, { state: waktu });
+  };
+
+  const handleFilterDataByDate = () => {
+    console.log(filterDate);
+    // dispatch(getJurnal({ waktu: filterDate.$d }));
   };
 
   return (
@@ -52,15 +58,20 @@ function JurnalUmumPage() {
               Waktu
             </Typography>
             <DatePicker
-              value={waktu}
+              value={filterDate}
               views={["year", "month"]}
               label="Year and Month"
               minDate={dayjs("2021-12")}
               maxDate={dayjs("2036-12")}
-              onChange={(newValue) => setWaktu(newValue)}
+              onChange={(newValue) => setFilterDate(newValue)}
               renderInput={(params) => <TextField {...params} />}
             />
-            <LoadingButton variant="contained" color="primary" sx={{ ml: 1 }}>
+            <LoadingButton
+              variant="contained"
+              color="primary"
+              sx={{ ml: 1 }}
+              onClick={() => handleFilterDataByDate()}
+            >
               Cari
             </LoadingButton>
           </CardContent>
@@ -72,7 +83,7 @@ function JurnalUmumPage() {
               color="GrayText"
               fontFamily="monospace"
             >
-              Total Data : 10
+              Total Data : {jurnal?.jurnal?.data?.length}
             </Typography>
           </CardContent>
           <CardContent

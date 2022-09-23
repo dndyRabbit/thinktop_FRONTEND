@@ -20,13 +20,13 @@ const DetailJurnalTable = ({
             <TableCell align="center">{data?.nama_akun}</TableCell>
             <TableCell align="center">
               {data?.tipe === "Debet"
-                ? `Rp.${formatRupiah(data?.nominal)}`
+                ? `Rp.${formatRupiah(data?.nominal)},-`
                 : "-"}
             </TableCell>
             <TableCell align="center">
               {/* {format(new Date(data), "dd/MM/yyyy")} */}
               {data?.tipe === "Kredit"
-                ? `Rp.${formatRupiah(data?.nominal)}`
+                ? `Rp.${formatRupiah(data?.nominal)},-`
                 : "-"}
             </TableCell>
 
@@ -68,7 +68,7 @@ const DetailJurnalTable = ({
               fontWeight: "bold",
             }}
           >
-            Rp.{formatRupiah(total?.debet)}
+            Rp.{formatRupiah(total?.debet)},-
           </TableCell>
           <TableCell
             align="center"
@@ -76,7 +76,7 @@ const DetailJurnalTable = ({
               fontWeight: "bold",
             }}
           >
-            Rp.{formatRupiah(total?.kredit)}
+            Rp.{formatRupiah(total?.kredit)},-
           </TableCell>
         </TableRow>
         <TableRow>

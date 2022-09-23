@@ -9,7 +9,7 @@ const JurnalTable = ({ data, index, handleNavToDetail }) => {
     <TableRow>
       <TableCell align="center">{++index}</TableCell>
       <TableCell align="center">
-        {format(new Date(data), "dd/MM/yyyy")}
+        {format(new Date(data), "dd MMMM yyyy")}
       </TableCell>
 
       <TableCell align="center">
