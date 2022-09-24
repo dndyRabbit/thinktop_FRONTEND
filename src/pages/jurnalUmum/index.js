@@ -31,6 +31,8 @@ function JurnalUmumPage() {
     // dispatch(getJurnal({ waktu: filterDate.$d }));
   };
 
+  console.log(jurnal?.jurnal);
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box sx={{ p: 3 }}>
