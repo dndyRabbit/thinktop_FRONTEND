@@ -25,14 +25,14 @@ const TextInput = ({
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Akun</InputLabel>
           <Select
-            value={data.nama_akun}
+            value={data.akun}
             label="Akun"
-            name="nama_akun"
+            name="akun"
             onChange={handleChangeInput}
           >
             {akun?.akun?.data?.map((data, index) => {
               return (
-                <MenuItem key={index} value={data?.nama_akun}>
+                <MenuItem key={index} value={data?.uuid}>
                   {data?.nama_akun}
                 </MenuItem>
               );

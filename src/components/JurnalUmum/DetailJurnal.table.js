@@ -11,13 +11,14 @@ const DetailJurnalTable = ({
   total,
   handleDeleteJurnal,
 }) => {
+  console.log(jurnalDetailDatas, "NWE DATA");
   return (
     <CardContent>
       <TableWrapper headers={jurnalDetailDatas?.head} align="center">
         {jurnalDetailDatas?.data?.map((data, index) => (
           <TableRow key={index}>
             <TableCell align="center">{++index}</TableCell>
-            <TableCell align="center">{data?.nama_akun}</TableCell>
+            <TableCell align="center">{data?.akun?.nama_akun}</TableCell>
             <TableCell align="center">
               {data?.tipe === "Debet"
                 ? `Rp.${formatRupiah(data?.nominal)},-`

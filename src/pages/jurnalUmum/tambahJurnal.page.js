@@ -20,7 +20,7 @@ const tipePembayaran = [
 
 const TambahJurnalPage = () => {
   const initialState = {
-    nama_akun: "",
+    akun: "",
     nominal: 0,
     tipe: "",
     keterangan: "",
@@ -46,6 +46,7 @@ const TambahJurnalPage = () => {
         ...data,
         waktu: removeTime(waktu.$d),
       };
+      console.log(data);
       dispatch(postJurnal({ newData, setData, initialState }));
     }
   };
