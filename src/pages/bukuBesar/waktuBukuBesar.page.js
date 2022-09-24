@@ -18,7 +18,7 @@ function WaktuBukuBesar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { nama_akun, kode_akun } = location.state;
+  const { nama_akun, kode_akun, uuid_akun } = location.state;
 
   const [filterDate, setFilterDate] = React.useState(dayjs());
 
@@ -36,7 +36,7 @@ function WaktuBukuBesar() {
   const getDataAkun = async () => {
     try {
       const response = await getDataAPI(
-        `buku_besar/${nama_akun}/${filterDate.$y}`
+        `buku_besar/${uuid_akun}/${filterDate.$y}`
       );
 
       setDataAkun(response?.data?.response);
