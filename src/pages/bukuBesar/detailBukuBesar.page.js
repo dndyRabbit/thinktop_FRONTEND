@@ -14,7 +14,7 @@ import TitleCard from "../../components/shared/TitleCard";
 const DetailBukuBesar = () => {
   const location = useLocation();
 
-  const { nama_akun, waktu, kode_akun } = location.state;
+  const { nama_akun, waktu, kode_akun, uuid_akun } = location.state;
 
   const [dataDetailAkun, setDataDetailAkun] = React.useState({
     data: null,
@@ -27,7 +27,7 @@ const DetailBukuBesar = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`detail_buku_besar/${nama_akun}/${waktu}`)
+      await getDataAPI(`detail_buku_besar/${uuid_akun}/${waktu}`)
         .then((response) => {
           let data = response?.data?.response?.data;
           const debetArr = data?.map((item) => {

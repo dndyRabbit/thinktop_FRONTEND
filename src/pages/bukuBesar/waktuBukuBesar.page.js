@@ -29,7 +29,7 @@ function WaktuBukuBesar() {
 
   const handleNavToDetail = (waktu) => {
     navigate(`/buku-besar/${nama_akun}/${waktu}`, {
-      state: { waktu, nama_akun, kode_akun },
+      state: { waktu, nama_akun, kode_akun, uuid_akun },
     });
   };
 
