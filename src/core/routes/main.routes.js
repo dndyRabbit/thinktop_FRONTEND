@@ -15,6 +15,8 @@ import DetailJurnal from "../../pages/jurnalUmum/detailJurnal.page";
 import BukuBesarPage from "../../pages/bukuBesar";
 import WaktuBukuBesar from "../../pages/bukuBesar/waktuBukuBesar.page";
 import DetailBukuBesar from "../../pages/bukuBesar/detailBukuBesar.page";
+import NeracaSaldoPage from "../../pages/neracaSaldo";
+import DetailNeracaSaldoPage from "../../pages/neracaSaldo/detailNeracaSaldo.page";
 
 const MainRoutes = () => {
   return (
@@ -32,7 +34,11 @@ const MainRoutes = () => {
           <Route path="buku-besar" element={<BukuBesarPage />} />
           <Route path="buku-besar/:akun" element={<WaktuBukuBesar />} />
           <Route path="buku-besar/:akun/:waktu" element={<DetailBukuBesar />} />
-          <Route path="neraca-saldo" element={<>NERACA SALDO</>} />
+          <Route path="neraca-saldo" element={<NeracaSaldoPage />} />
+          <Route
+            path="neraca-saldo/:waktu"
+            element={<DetailNeracaSaldoPage />}
+          />
         </Route>
         <Route path="/login" element={<LoginPage />} />;
         <Route path="*" element={<>HALAMAN TIDAK ADA.</>} />
