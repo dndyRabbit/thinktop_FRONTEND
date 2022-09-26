@@ -8,9 +8,31 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PrintingInvoices from "../../assets/img/undraw/printing_invoices.svg";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../core/redux/actions/auth.action";
 const theme = createTheme();
 
 function LoginPage() {
+  const dispatch = useDispatch();
+
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+  });
+
+  const refSubmitButton = useRef();
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(login(data));
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
@@ -31,11 +53,15 @@ function LoginPage() {
               justifyContent: "space-between",
               alignItems: "center",
               color: "white",
-              height: "100vh"
+              height: "100vh",
             }}
           >
-            <Box component="div" sx={{width: '100%', px: 4}}>
-              <img src={PrintingInvoices} alt="logo-ils" style={{width: '100%'}} />
+            <Box component="div" sx={{ width: "100%", px: 4 }}>
+              <img
+                src={PrintingInvoices}
+                alt="logo-ils"
+                style={{ width: "100%" }}
+              />
             </Box>
           </Box>
         </Grid>
@@ -54,12 +80,8 @@ function LoginPage() {
               alignItems: "center",
             }}
           >
-            <Box
-              component="form"
-              noValidate
-              sx={{ mt: 1, width: "100%" }}
-            >
-              <Typography>Username</Typography>
+            <Box component="form" noValidate sx={{ mt: 1, width: "100%" }}>
+              <Typography>Email</Typography>
               <TextField
                 margin="normal"
                 required
@@ -68,13 +90,8 @@ function LoginPage() {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                // value={form.email}
-                // onChange={(e) =>
-                //   dispatch({
-                //     type: "SET_FORM_LOGIN",
-                //     payload: { email: e.target.value },
-                //   })
-                // }
+                value={data.email}
+                onChange={handleChangeInput}
               />
               <Typography>Password</Typography>
               <TextField
@@ -85,24 +102,20 @@ function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                // value={form.pw}
-                // onChange={(e) =>
-                //   dispatch({
-                //     type: "SET_FORM_LOGIN",
-                //     payload: { pw: e.target.value },
-                //   })
-                // }
-                // onKeyPress={(e) => {
-                //   if (e.key === "Enter") refSubmitButton.current.click();
-                // }}
+                value={data.password}
+                onChange={handleChangeInput}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") refSubmitButton.current.click();
+                }}
               />
               <Button
-                // ref={refSubmitButton}
+                ref={refSubmitButton}
                 type="submit"
                 fullWidth
                 variant="contained"
                 size="large"
                 sx={{ mt: 3, mb: 2, background: "#063970" }}
+                onClick={handleLogin}
               >
                 Masuk
               </Button>
@@ -111,7 +124,7 @@ function LoginPage() {
         </Grid>
       </Grid>
     </ThemeProvider>
-  )
-};
+  );
+}
 
 export default LoginPage;
