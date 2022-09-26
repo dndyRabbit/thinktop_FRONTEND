@@ -19,7 +19,7 @@ const DetailJurnal = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { jurnal } = useSelector((state) => state);
+  const { jurnal, auth } = useSelector((state) => state);
 
   const [waktu] = React.useState(location.state);
   const [jurnalDetailDatas, setJurnalDetailDatas] = React.useState(null);
@@ -30,7 +30,7 @@ const DetailJurnal = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`jurnal/${waktu}`)
+      await getDataAPI(`jurnal/${waktu}`, `bearer ${auth?.auth?.access_token}`)
         .then((response) => {
           let data = response?.data?.response?.data;
           const debetArr = data?.map((item) => {

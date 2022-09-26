@@ -3,8 +3,6 @@ import { CardContent, Grid, Paper, styled } from "@mui/material";
 import React from "react";
 
 const DaftarAkunContent = ({ data, handleNav }) => {
-  console.log(data, "DATAA");
-
   return (
     <CardContent>
       <Grid

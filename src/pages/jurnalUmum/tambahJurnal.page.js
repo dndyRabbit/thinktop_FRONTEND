@@ -28,7 +28,7 @@ const TambahJurnalPage = () => {
 
   const dispatch = useDispatch();
 
-  const { akun, jurnal } = useSelector((state) => state);
+  const { akun, jurnal, auth } = useSelector((state) => state);
 
   const [data, setData] = React.useState(initialState);
   const [waktu, setWaktu] = React.useState(dayjs());
@@ -46,8 +46,14 @@ const TambahJurnalPage = () => {
         ...data,
         waktu: removeTime(waktu.$d),
       };
-      console.log(data);
-      dispatch(postJurnal({ newData, setData, initialState }));
+      dispatch(
+        postJurnal({
+          newData,
+          setData,
+          initialState,
+          token: `bearer ${auth?.auth?.access_token}`,
+        })
+      );
     }
   };
 

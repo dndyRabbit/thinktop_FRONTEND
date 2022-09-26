@@ -13,10 +13,13 @@ import TitleCard from "../../components/shared/TitleCard";
 import { useEffect } from "react";
 import { getDataAPI } from "../../core/utils/fetchData";
 import DataAkunTable from "../../components/BukuBesar/DataAkun.table";
+import { useSelector } from "react-redux";
 
 const NeracaSaldoPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const { auth } = useSelector((state) => state);
 
   const [filterDate, setFilterDate] = React.useState(dayjs());
 
@@ -26,7 +29,6 @@ const NeracaSaldoPage = () => {
   });
 
   const handleNavToDetail = (waktu) => {
-    console.log(waktu);
     navigate(`${waktu}`, {
       state: { waktu },
     });
@@ -34,7 +36,10 @@ const NeracaSaldoPage = () => {
 
   const getNeracaSaldoDate = async () => {
     try {
-      const response = await getDataAPI(`neraca_saldo/${filterDate.$y}`);
+      const response = await getDataAPI(
+        `neraca_saldo/${filterDate.$y}`,
+        `bearer ${auth?.auth?.access_token}`
+      );
 
       setNeracaSaldoData(response?.data?.response);
     } catch (err) {

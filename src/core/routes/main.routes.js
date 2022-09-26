@@ -17,6 +17,9 @@ import WaktuBukuBesar from "../../pages/bukuBesar/waktuBukuBesar.page";
 import DetailBukuBesar from "../../pages/bukuBesar/detailBukuBesar.page";
 import NeracaSaldoPage from "../../pages/neracaSaldo";
 import DetailNeracaSaldoPage from "../../pages/neracaSaldo/detailNeracaSaldo.page";
+import Beranda from "../../pages";
+import { useDispatch, useSelector } from "react-redux";
+import { refreshToken } from "../redux/actions/auth.action";
 
 const MainRoutes = () => {
   return (
@@ -24,7 +27,7 @@ const MainRoutes = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* <Route index path="" element={<Navigate replace to="/login" />} /> */}
-          <Route path="" element={<>DASHBOARD</>} />
+          <Route path="" element={<Beranda />} />
           <Route path="profil" element={<>PROFIL</>} />
           <Route path="akun" element={<AkunPage />} />
           <Route path="akun/tambah" element={<TambahAkunPage />} />
@@ -40,7 +43,9 @@ const MainRoutes = () => {
             element={<DetailNeracaSaldoPage />}
           />
         </Route>
-        <Route path="/login" element={<LoginPage />} />;
+
+        <Route path="/login" element={<LoginPage />} />
+
         <Route path="*" element={<>HALAMAN TIDAK ADA.</>} />
       </Routes>
     </Router>

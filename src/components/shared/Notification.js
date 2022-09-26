@@ -8,7 +8,7 @@ export const confirmation = (title, text) => {
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
-    confirmButtonText: "Ya, hapus ini!",
+    confirmButtonText: "Ya! setuju.",
   });
 };
 

@@ -13,12 +13,14 @@ import TitleCard from "../../components/shared/TitleCard";
 import { useEffect } from "react";
 import { getDataAPI } from "../../core/utils/fetchData";
 import DataAkunTable from "../../components/BukuBesar/DataAkun.table";
+import { useSelector } from "react-redux";
 
 function WaktuBukuBesar() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { nama_akun, kode_akun, uuid_akun } = location.state;
+  const { jurnal, auth } = useSelector((state) => state);
 
   const [filterDate, setFilterDate] = React.useState(dayjs());
 
@@ -36,7 +38,8 @@ function WaktuBukuBesar() {
   const getDataAkun = async () => {
     try {
       const response = await getDataAPI(
-        `buku_besar/${uuid_akun}/${filterDate.$y}`
+        `buku_besar/${uuid_akun}/${filterDate.$y}`,
+        `bearer ${auth?.auth?.access_token}`
       );
 
       setDataAkun(response?.data?.response);
@@ -47,7 +50,6 @@ function WaktuBukuBesar() {
 
   useEffect(() => {
     getDataAkun();
-    console.log();
   }, [nama_akun]);
 
   return (

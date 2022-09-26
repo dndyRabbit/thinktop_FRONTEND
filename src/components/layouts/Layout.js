@@ -2,13 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
 import ThemeConfig from "../../core/theme";
 import Navbar from "./Navbar";
 import DrawerApp from "./Drawer";
 import useDrawer from "../../core/hooks/useDrawer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAkun } from "../../core/redux/actions/akun.action";
 import { getJurnal } from "../../core/redux/actions/jurnal.action";
 
@@ -17,11 +17,21 @@ function Layout(props) {
     useDrawer(props);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { auth } = useSelector((state) => state);
 
   React.useEffect(() => {
-    dispatch(getAkun());
-    dispatch(getJurnal());
-  }, []);
+    dispatch(getAkun({ token: `bearer ${auth?.auth?.access_token}` }));
+    dispatch(getJurnal({ token: `bearer ${auth?.auth?.access_token}` }));
+  }, [auth?.auth?.access_token]);
+
+  // React.useEffect(() => {
+  //   if (!auth.auth.access_token) {
+  //     navigate("/login");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [auth.auth.access_token]);
 
   return (
     <ThemeProvider theme={ThemeConfig}>

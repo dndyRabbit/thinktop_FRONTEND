@@ -11,11 +11,14 @@ import { format } from "date-fns";
 import DetailDataAkunByDate from "../../components/BukuBesar/DetailDataAkunByDate.table";
 import TitleCard from "../../components/shared/TitleCard";
 import DetailNeracaSaldoTable from "../../components/NeracaSaldo/DetailNeracaSaldo.table";
+import { useSelector } from "react-redux";
 
 const DetailNeracaSaldoPage = () => {
   const location = useLocation();
 
   const { waktu } = location.state;
+
+  const { jurnal, auth } = useSelector((state) => state);
 
   const [dataDetailNeracaSaldo, setDataDetailNeracaSaldo] = React.useState({
     data: null,
@@ -28,7 +31,10 @@ const DetailNeracaSaldoPage = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`detail_neraca_saldo/${waktu}`)
+      await getDataAPI(
+        `detail_neraca_saldo/${waktu}`,
+        `bearer ${auth?.auth?.access_token}`
+      )
         .then((response) => {
           const tempArr = response?.data?.response?.data;
 

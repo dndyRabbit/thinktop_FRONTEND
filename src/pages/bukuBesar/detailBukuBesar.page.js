@@ -10,11 +10,14 @@ import { getDataAPI } from "../../core/utils/fetchData";
 import { format } from "date-fns";
 import DetailDataAkunByDate from "../../components/BukuBesar/DetailDataAkunByDate.table";
 import TitleCard from "../../components/shared/TitleCard";
+import { useSelector } from "react-redux";
 
 const DetailBukuBesar = () => {
   const location = useLocation();
 
   const { nama_akun, waktu, kode_akun, uuid_akun } = location.state;
+
+  const { jurnal, auth } = useSelector((state) => state);
 
   const [dataDetailAkun, setDataDetailAkun] = React.useState({
     data: null,
@@ -27,7 +30,10 @@ const DetailBukuBesar = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`detail_buku_besar/${uuid_akun}/${waktu}`)
+      await getDataAPI(
+        `detail_buku_besar/${uuid_akun}/${waktu}`,
+        `bearer ${auth?.auth?.access_token}`
+      )
         .then((response) => {
           let data = response?.data?.response?.data;
           const debetArr = data?.map((item) => {

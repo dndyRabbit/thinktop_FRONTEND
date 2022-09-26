@@ -16,7 +16,7 @@ export const JURNAL_TYPES = {
 };
 
 export const postJurnal =
-  ({ newData, setData, initialState }) =>
+  ({ newData, setData, initialState, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -24,7 +24,7 @@ export const postJurnal =
         payload: { loading: true },
       });
 
-      const response = await postDataAPI("jurnal", newData);
+      const response = await postDataAPI("jurnal", newData, token);
 
       dispatch({
         type: JURNAL_TYPES.POST_JURNAL,
@@ -47,28 +47,30 @@ export const postJurnal =
     }
   };
 
-export const getJurnal = () => async (dispatch) => {
-  try {
-    dispatch({
-      type: JURNAL_TYPES.LOADING,
-      payload: { loading: true },
-    });
+export const getJurnal =
+  ({ token }) =>
+  async (dispatch) => {
+    try {
+      dispatch({
+        type: JURNAL_TYPES.LOADING,
+        payload: { loading: true },
+      });
 
-    const response = await getDataAPI("jurnal");
+      const response = await getDataAPI("jurnal", token);
 
-    dispatch({
-      type: JURNAL_TYPES.GET_JURNAL,
-      payload: { response: response.data.response },
-    });
+      dispatch({
+        type: JURNAL_TYPES.GET_JURNAL,
+        payload: { response: response.data.response },
+      });
 
-    dispatch({
-      type: JURNAL_TYPES.LOADING,
-      payload: { loading: false },
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+      dispatch({
+        type: JURNAL_TYPES.LOADING,
+        payload: { loading: false },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 export const deleteJurnal =
   ({ uuid_jurnal }) =>
