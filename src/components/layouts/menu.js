@@ -1,46 +1,39 @@
 const Menu = [
   {
-    path: '/',
-    parent: '/',
-    title: 'Beranda',
+    path: "/",
+    parent: "/",
+    title: "Beranda",
     icon: "DashboardSVG",
-    children: null
+    children: null,
   },
   {
-    path: '/profil',
-    parent: 'profil',
-    title: 'Profil',
+    path: "/produk",
+    parent: "produk",
+    title: "Produk",
     icon: "DashboardSVG",
-    children: null
+    children: null,
   },
   {
-    path: '/akun',
-    parent: 'akun',
-    title: 'Akun',
+    path: "/akun",
+    parent: "akun",
+    title: "Akun",
     icon: "DashboardSVG",
-    children: null
+    children: null,
   },
   {
-    path: '/jurnal-umum',
-    parent: 'jurnal-umum',
-    title: 'Jurnal Umum',
+    path: "/pembelian",
+    parent: "pembelian",
+    title: "Pembelian",
     icon: "DashboardSVG",
-    children: null
+    children: null,
   },
   {
-    path: '/buku-besar',
-    parent: 'buku-besar',
-    title: 'Buku Besar',
+    path: "/laporan",
+    parent: "laporan",
+    title: "Laporan",
     icon: "DashboardSVG",
-    children: null
+    children: null,
   },
-  {
-    path: '/neraca-saldo',
-    parent: 'neraca-saldo',
-    title: 'Neraca Saldo',
-    icon: "DashboardSVG",
-    children: null
-  }
 ];
 
 export default Menu;

@@ -7,94 +7,97 @@ import {
   deleteDataAPI,
 } from "../../utils/fetchData";
 
-export const AKUN_TYPES = {
+export const PRODUCT_TYPES = {
   LOADING: "LOADING",
-  POST_AKUN: "POST_AKUN",
-  GET_AKUN: "GET_AKUN",
-  PUT_AKUN: "PUT_AKUN",
-  DELETE_AKUN: "DELETE_AKUN",
+  POST_PRODUCT: "POST_PRODUCT",
+  GET_PRODUCT: "GET_PRODUCT",
+  PUT_PRODUCT: "PUT_PRODUCT",
+  DELETE_PRODUCT: "DELETE_PRODUCT",
 };
 
-export const postAkun =
-  ({ data, setData, initialState, navigate }) =>
+export const postProduct =
+  ({ data, setData, initialState }) =>
   async (dispatch) => {
     try {
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: true },
       });
 
-      const response = await postDataAPI("akun", data);
+      const response = await postDataAPI("product", data);
 
       dispatch({
-        type: AKUN_TYPES.POST_AKUN,
+        type: PRODUCT_TYPES.POST_PRODUCT,
         payload: { response: response.data.response },
       });
 
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: false },
       });
 
       setData(initialState);
-      await success("Berhasil membuat akun.");
-      navigate("/akun");
+      await success("Berhasil membuat product.");
     } catch (err) {
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: false },
       });
       await error(err.response.data.message);
     }
   };
 
-export const getAkun = () => async (dispatch) => {
+export const getProduct = () => async (dispatch) => {
   try {
     dispatch({
-      type: AKUN_TYPES.LOADING,
+      type: PRODUCT_TYPES.LOADING,
       payload: { loading: true },
     });
 
-    const response = await getDataAPI("akun");
+    const response = await getDataAPI("product");
 
     dispatch({
-      type: AKUN_TYPES.GET_AKUN,
+      type: PRODUCT_TYPES.GET_PRODUCT,
       payload: { response: response.data.response },
     });
 
     dispatch({
-      type: AKUN_TYPES.LOADING,
+      type: PRODUCT_TYPES.LOADING,
       payload: { loading: false },
     });
   } catch (err) {
+    dispatch({
+      type: PRODUCT_TYPES.LOADING,
+      payload: { loading: false },
+    });
     console.log(err);
   }
 };
 
-export const deleteAkun =
-  ({ uuid_akun }) =>
+export const deleteProduct =
+  ({ uuid_product }) =>
   async (dispatch) => {
     try {
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: true },
       });
 
-      await deleteDataAPI(`akun/${uuid_akun}`);
+      await deleteDataAPI(`product/${uuid_product}`);
 
       dispatch({
-        type: AKUN_TYPES.DELETE_AKUN,
-        payload: { uuid_akun },
+        type: PRODUCT_TYPES.DELETE_PRODUCT,
+        payload: { uuid_product },
       });
 
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: false },
       });
     } catch (err) {
       console.log(err);
       dispatch({
-        type: AKUN_TYPES.LOADING,
+        type: PRODUCT_TYPES.LOADING,
         payload: { loading: false },
       });
       await error(err.response.data.message);

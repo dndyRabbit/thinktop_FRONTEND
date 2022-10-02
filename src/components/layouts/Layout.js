@@ -10,7 +10,7 @@ import DrawerApp from "./Drawer";
 import useDrawer from "../../core/hooks/useDrawer";
 import { useDispatch, useSelector } from "react-redux";
 import { getAkun } from "../../core/redux/actions/akun.action";
-import { getJurnal } from "../../core/redux/actions/jurnal.action";
+import { getProduct } from "../../core/redux/actions/product.action";
 
 function Layout(props) {
   const { container, drawerWidth, mobileOpen, handleDrawerToggle } =
@@ -21,8 +21,9 @@ function Layout(props) {
   const { auth } = useSelector((state) => state);
 
   React.useEffect(() => {
-    dispatch(getAkun({ token: `bearer ${auth?.auth?.access_token}` }));
-    dispatch(getJurnal({ token: `bearer ${auth?.auth?.access_token}` }));
+    // dispatch(getAkun({ token: `bearer ${auth?.auth?.access_token}` }));
+    dispatch(getAkun());
+    dispatch(getProduct());
   }, [auth?.auth?.access_token]);
 
   // React.useEffect(() => {

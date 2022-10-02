@@ -9,17 +9,17 @@ import Layout from "../../components/layouts/Layout";
 import AkunPage from "../../pages/akun";
 import LoginPage from "../../pages/auth/Login";
 import TambahAkunPage from "../../pages/akun/tambahAkun.page";
-import JurnalUmumPage from "../../pages/jurnalUmum";
-import TambahJurnalPage from "../../pages/jurnalUmum/tambahJurnal.page";
-import DetailJurnal from "../../pages/jurnalUmum/detailJurnal.page";
-import BukuBesarPage from "../../pages/bukuBesar";
-import WaktuBukuBesar from "../../pages/bukuBesar/waktuBukuBesar.page";
-import DetailBukuBesar from "../../pages/bukuBesar/detailBukuBesar.page";
-import NeracaSaldoPage from "../../pages/neracaSaldo";
-import DetailNeracaSaldoPage from "../../pages/neracaSaldo/detailNeracaSaldo.page";
 import Beranda from "../../pages";
-import { useDispatch, useSelector } from "react-redux";
-import { refreshToken } from "../redux/actions/auth.action";
+import ProductPage from "../../pages/product";
+import TambahProductPage from "../../pages/product/tambahProduct.page";
+import TambahPembelianPage from "../../pages/Pembelian";
+import LaporanMenuPage from "../../pages/Laporan";
+import LaporanHarianPage from "../../pages/Laporan/harian.page";
+import LaporanHarianDetail from "../../pages/Laporan/harian.detail.page";
+import LaporanBulananPage from "../../pages/Laporan/bulanan.page";
+import LaporanBulananDetail from "../../pages/Laporan/bulanan.detail.page";
+import LaporanTahunanPage from "../../pages/Laporan/tahunan.page";
+import LaporanTahunanDetail from "../../pages/Laporan/tahunan.detail.page";
 
 const MainRoutes = () => {
   return (
@@ -28,19 +28,26 @@ const MainRoutes = () => {
         <Route path="/" element={<Layout />}>
           {/* <Route index path="" element={<Navigate replace to="/login" />} /> */}
           <Route path="" element={<Beranda />} />
-          <Route path="profil" element={<>PROFIL</>} />
+          <Route path="produk" element={<ProductPage />} />
+          <Route path="produk/tambah" element={<TambahProductPage />} />
           <Route path="akun" element={<AkunPage />} />
           <Route path="akun/tambah" element={<TambahAkunPage />} />
-          <Route path="jurnal-umum" element={<JurnalUmumPage />} />
-          <Route path="jurnal-umum/tambah" element={<TambahJurnalPage />} />
-          <Route path="jurnal-umum/:waktu" element={<DetailJurnal />} />
-          <Route path="buku-besar" element={<BukuBesarPage />} />
-          <Route path="buku-besar/:akun" element={<WaktuBukuBesar />} />
-          <Route path="buku-besar/:akun/:waktu" element={<DetailBukuBesar />} />
-          <Route path="neraca-saldo" element={<NeracaSaldoPage />} />
+          <Route path="pembelian" element={<TambahPembelianPage />} />
+          <Route path="laporan" element={<LaporanMenuPage />} />
+          <Route path="laporan/harian" element={<LaporanHarianPage />} />
           <Route
-            path="neraca-saldo/:waktu"
-            element={<DetailNeracaSaldoPage />}
+            path="laporan/harian/:waktu"
+            element={<LaporanHarianDetail />}
+          />
+          <Route path="laporan/bulanan" element={<LaporanBulananPage />} />
+          <Route
+            path="laporan/bulanan/:waktu"
+            element={<LaporanBulananDetail />}
+          />
+          <Route path="laporan/tahunan" element={<LaporanTahunanPage />} />
+          <Route
+            path="laporan/tahunan/:waktu"
+            element={<LaporanTahunanDetail />}
           />
         </Route>
 

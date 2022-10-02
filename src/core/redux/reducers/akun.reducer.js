@@ -3,7 +3,9 @@ import { DeleteData } from "../actions/globalTypes.action";
 
 const initialState = {
   loading: false,
-  akun: [],
+  akun: {
+    data: [],
+  },
   message: "",
 };
 

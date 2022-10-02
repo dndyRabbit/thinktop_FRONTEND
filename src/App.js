@@ -7,7 +7,7 @@ function App() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(refreshToken());
+    // dispatch(refreshToken());
   }, []);
 
   return <MainRoutes />;
