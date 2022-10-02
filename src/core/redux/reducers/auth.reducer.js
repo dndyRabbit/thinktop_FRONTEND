@@ -4,7 +4,6 @@ import { DeleteData } from "../actions/globalTypes.action";
 const initialState = {
   loading: false,
   auth: [],
-  message: "",
 };
 
 const authReducer = (state = initialState, action) => {

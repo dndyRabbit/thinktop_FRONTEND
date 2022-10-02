@@ -21,18 +21,13 @@ function Layout(props) {
   const { auth } = useSelector((state) => state);
 
   React.useEffect(() => {
-    // dispatch(getAkun({ token: `bearer ${auth?.auth?.access_token}` }));
-    dispatch(getAkun());
-    dispatch(getProduct());
+    dispatch(getAkun(`bearer ${auth?.auth?.access_token}`));
+    dispatch(getProduct(`bearer ${auth?.auth?.access_token}`));
   }, [auth?.auth?.access_token]);
 
-  // React.useEffect(() => {
-  //   if (!auth.auth.access_token) {
-  //     navigate("/login");
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, [auth.auth.access_token]);
+  React.useEffect(() => {
+    if (!auth?.auth?.access_token) return navigate("login");
+  }, [auth?.auth?.access_token]);
 
   return (
     <ThemeProvider theme={ThemeConfig}>

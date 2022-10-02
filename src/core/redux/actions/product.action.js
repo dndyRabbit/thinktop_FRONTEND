@@ -16,7 +16,7 @@ export const PRODUCT_TYPES = {
 };
 
 export const postProduct =
-  ({ data, setData, initialState }) =>
+  ({ data, setData, initialState, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -24,7 +24,7 @@ export const postProduct =
         payload: { loading: true },
       });
 
-      const response = await postDataAPI("product", data);
+      const response = await postDataAPI("product", data, token);
 
       dispatch({
         type: PRODUCT_TYPES.POST_PRODUCT,
@@ -47,14 +47,14 @@ export const postProduct =
     }
   };
 
-export const getProduct = () => async (dispatch) => {
+export const getProduct = (token) => async (dispatch) => {
   try {
     dispatch({
       type: PRODUCT_TYPES.LOADING,
       payload: { loading: true },
     });
 
-    const response = await getDataAPI("product");
+    const response = await getDataAPI("product", token);
 
     dispatch({
       type: PRODUCT_TYPES.GET_PRODUCT,
@@ -95,7 +95,6 @@ export const deleteProduct =
         payload: { loading: false },
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: PRODUCT_TYPES.LOADING,
         payload: { loading: false },

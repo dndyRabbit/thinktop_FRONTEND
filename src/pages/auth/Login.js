@@ -9,12 +9,15 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PrintingInvoices from "../../assets/img/undraw/printing_invoices.svg";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../core/redux/actions/auth.action";
+import { Navigate, useNavigate } from "react-router-dom";
 const theme = createTheme();
 
 function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { auth } = useSelector((state) => state);
 
   const [data, setData] = React.useState({
     email: "",
@@ -32,6 +35,10 @@ function LoginPage() {
     e.preventDefault();
     dispatch(login(data));
   };
+
+  React.useEffect(() => {
+    if (auth?.auth?.access_token) return navigate("/");
+  }, [auth?.auth?.access_token]);
 
   return (
     <ThemeProvider theme={theme}>

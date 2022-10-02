@@ -16,7 +16,7 @@ export const AKUN_TYPES = {
 };
 
 export const postAkun =
-  ({ data, setData, initialState, navigate }) =>
+  ({ data, setData, initialState, navigate, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -24,7 +24,7 @@ export const postAkun =
         payload: { loading: true },
       });
 
-      const response = await postDataAPI("akun", data);
+      const response = await postDataAPI("akun", data, token);
 
       dispatch({
         type: AKUN_TYPES.POST_AKUN,
@@ -48,14 +48,14 @@ export const postAkun =
     }
   };
 
-export const getAkun = () => async (dispatch) => {
+export const getAkun = (token) => async (dispatch) => {
   try {
     dispatch({
       type: AKUN_TYPES.LOADING,
       payload: { loading: true },
     });
 
-    const response = await getDataAPI("akun");
+    const response = await getDataAPI("akun", token);
 
     dispatch({
       type: AKUN_TYPES.GET_AKUN,

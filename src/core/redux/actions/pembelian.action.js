@@ -16,7 +16,7 @@ export const PEMBELIAN_TYPES = {
 };
 
 export const postPembelian =
-  ({ newData, setData, initialState }) =>
+  ({ newData, setData, initialState, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -24,7 +24,7 @@ export const postPembelian =
         payload: { loading: true },
       });
 
-      const response = await postDataAPI("pembelian", newData);
+      const response = await postDataAPI("pembelian", newData, token);
 
       dispatch({
         type: PEMBELIAN_TYPES.POST_PEMBELIAN,
