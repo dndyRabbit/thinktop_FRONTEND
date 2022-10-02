@@ -110,7 +110,7 @@ const LaporanBulananPage = () => {
             }}
           >
             <Typography variant="body1" sx={{ fontWeight: "700" }}>
-              Daftar Laporan Harian
+              Daftar Laporan Bulanan
             </Typography>
             <TableWrapper headers={bulananWaktu?.head} align="center">
               {bulananWaktu?.data?.map((data, index) => (
