@@ -27,7 +27,7 @@ const TambahAkunPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { akun } = useSelector((state) => state);
+  const { akun, auth } = useSelector((state) => state);
 
   const [data, setData] = React.useState(initialState);
 
@@ -40,7 +40,15 @@ const TambahAkunPage = () => {
     if (data.kode_akun == "" || data.nama_akun == "") {
       await warning("Data akun tidak boleh kosong.");
     } else {
-      dispatch(postAkun({ data, setData, initialState, navigate }));
+      dispatch(
+        postAkun({
+          data,
+          setData,
+          initialState,
+          navigate,
+          token: `bearer ${auth?.auth?.access_token}`,
+        })
+      );
     }
   };
 
