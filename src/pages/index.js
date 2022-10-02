@@ -6,25 +6,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { LoadingButton } from "@mui/lab";
 import { useNavigate } from "react-router-dom";
-
-const navItem = [
-  {
-    label: "Akun",
-    nav: "akun",
-  },
-  {
-    label: "Jurnal Umum",
-    nav: "jurnal-umum",
-  },
-  {
-    label: "Buku Besar",
-    nav: "buku-besar",
-  },
-  {
-    label: "Neraca Saldo",
-    nav: "neraca-saldo",
-  },
-];
+import Menu from "../components/layouts/menu";
 
 const Beranda = () => {
   const navigate = useNavigate();
@@ -39,12 +21,12 @@ const Beranda = () => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {navItem.map((item, index) => (
+            {Menu?.map((item, index) => (
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <LoadingButton
                   sx={{ width: "100%" }}
                   variant="contained"
-                  onClick={() => navigate(`${item.nav}`)}
+                  onClick={() => navigate(`${item.path}`)}
                 >
                   <Typography
                     gutterBottom
@@ -52,7 +34,7 @@ const Beranda = () => {
                     component="div"
                     sx={{ fontWeight: "500" }}
                   >
-                    {item.label}
+                    {item.title}
                   </Typography>
                 </LoadingButton>
               </Grid>

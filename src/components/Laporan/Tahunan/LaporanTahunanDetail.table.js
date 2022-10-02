@@ -42,6 +42,7 @@ const LaporanTahunanDetailTable = ({
                   startIcon={<EditIcon />}
                   sx={{
                     mx: 1,
+                    my: 1,
                   }}
                 >
                   Edit

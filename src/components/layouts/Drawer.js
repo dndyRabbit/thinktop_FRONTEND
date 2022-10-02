@@ -48,8 +48,16 @@ function DrawerApp(props) {
 
   const drawer = (
     <div>
-      <Toolbar sx={{ my: props.mobileOpen ? 0 : 4 }}>
-        {/* {!props.mobileOpen && <img src={AULogo.AULogo190x140} alt="au-logo" style={{ width: '100%' }} />} */}
+      <Toolbar sx={{ my: props.mobileOpen ? 0 : 4, mx: 5 }}>
+        {!props.mobileOpen && (
+          <img
+            src={
+              "https://pngimage.net/wp-content/uploads/2018/06/sun-png-logo-.png"
+            }
+            alt="Logo-Thinktop"
+            style={{ width: "100%" }}
+          />
+        )}
         {props.mobileOpen && <Typography>NT</Typography>}
       </Toolbar>
       <List>

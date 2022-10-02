@@ -16,7 +16,6 @@ const LaporanBulananDetailTable = ({
     <CardContent>
       <TableWrapper headers={bulananData?.head} align="center">
         {bulananData?.data?.map((data, index) => {
-          console.log(data);
           return (
             <TableRow key={index}>
               <TableCell align="center">{++index}</TableCell>
@@ -42,6 +41,7 @@ const LaporanBulananDetailTable = ({
                   startIcon={<EditIcon />}
                   sx={{
                     mx: 1,
+                    my: 1,
                   }}
                 >
                   Edit

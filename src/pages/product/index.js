@@ -1,21 +1,12 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  TableCell,
-  TableRow,
-} from "@mui/material";
+import { Box, Button, Card, CardContent } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
 import { TableWrapper } from "../../components/shared/Table";
 import TitleCard from "../../components/shared/TitleCard";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { LoadingButton } from "@mui/lab";
 import Swal from "sweetalert2";
-import { confirmation, error } from "../../components/shared/Notification";
+import { confirmation } from "../../components/shared/Notification";
 
 import ProductTable from "../../components/Product/Product.table";
 import { deleteProduct } from "../../core/redux/actions/product.action";
@@ -24,7 +15,7 @@ function ProductPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { akun, product } = useSelector((state) => state);
+  const { product } = useSelector((state) => state);
 
   const handleDelete = async ({ uuid_product }) => {
     await confirmation(
@@ -57,7 +48,7 @@ function ProductPage() {
             {product?.product?.data?.map((data, index) => (
               <ProductTable
                 key={index}
-                akun={akun}
+                product={product}
                 data={data}
                 index={index}
                 handleDelete={handleDelete}
