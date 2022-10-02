@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
-  Button,
   Card,
   CardContent,
   FormControl,
@@ -9,9 +8,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { TableWrapper } from "../../components/shared/Table";
 import TitleCard from "../../components/shared/TitleCard";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { warning } from "../../components/shared/Notification";
@@ -22,13 +19,11 @@ const TambahProductPage = () => {
     product_name: "",
     description: "",
     price: 0,
-    stock: 0,
   };
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { product } = useSelector((state) => state);
+  const { product, auth } = useSelector((state) => state);
 
   const [data, setData] = React.useState(initialState);
 
@@ -38,10 +33,17 @@ const TambahProductPage = () => {
   };
 
   const onSubmit = async () => {
-    if (data.product_name === "" || data.price === 0 || data.stock === 0) {
+    if (data.product_name === "" || data.price === 0) {
       await warning("Data produk tidak boleh kosong.");
     } else {
-      dispatch(postProduct({ data, setData, initialState }));
+      dispatch(
+        postProduct({
+          data,
+          setData,
+          initialState,
+          token: `bearer ${auth?.auth?.access_token}`,
+        })
+      );
     }
   };
 
@@ -80,18 +82,6 @@ const TambahProductPage = () => {
               label="Harga"
               name="price"
               value={data.price}
-              onChange={handleChangeInput}
-            />
-          </FormControl>
-        </CardContent>
-
-        <CardContent>
-          <FormControl fullWidth>
-            <InputLabel>Stok</InputLabel>
-            <OutlinedInput
-              label="Stok"
-              name="stock"
-              value={data.stock}
               onChange={handleChangeInput}
             />
           </FormControl>

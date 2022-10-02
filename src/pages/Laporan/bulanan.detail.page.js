@@ -25,7 +25,10 @@ const LaporanBulananDetail = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`laporan-bulanan-data/${waktu}`)
+      await getDataAPI(
+        `laporan-bulanan-data/${waktu}`,
+        `bearer ${auth?.auth?.access_token}`
+      )
         .then((response) => {
           let data = response?.data?.response?.data;
           const totalArr = data?.map((item) => {
@@ -38,7 +41,6 @@ const LaporanBulananDetail = () => {
             (sum, { price, quantity }) => sum + price * quantity,
             0
           );
-          console.log(data, "BULANAN DATA");
 
           setBulananData(response?.data?.response);
           setTotal(totalPrice);
@@ -78,7 +80,7 @@ const LaporanBulananDetail = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Card elevation={0}>
-        <TitleCard title={`DATA LAPORAN HARIAN`} />
+        <TitleCard title={`DATA LAPORAN BULANAN`} />
         <CardContent
           sx={{
             display: "flex",

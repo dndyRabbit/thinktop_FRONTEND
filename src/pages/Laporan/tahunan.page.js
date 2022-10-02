@@ -7,20 +7,21 @@ import TitleCard from "../../components/shared/TitleCard";
 import { error } from "../../components/shared/Notification";
 import { getDataAPI } from "../../core/utils/fetchData";
 import LaporanTahunanWaktuTable from "../../components/Laporan/Tahunan/LaporanTahunanWaktu.table";
+import { useSelector } from "react-redux";
 
 const LaporanTahunanPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { api, path } = location.state;
+  const { auth } = useSelector((state) => state);
 
   const [tahunanWaktu, setTahunanWaktu] = React.useState(null);
 
   React.useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(api)
+      await getDataAPI(api, `bearer ${auth?.auth?.access_token}`)
         .then((response) => {
-          console.log(response?.data?.response);
           setTahunanWaktu(response?.data?.response);
         })
         .catch((err) => {

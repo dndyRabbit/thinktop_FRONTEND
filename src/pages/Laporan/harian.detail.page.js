@@ -3,7 +3,6 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Swal from "sweetalert2";
 import { confirmation, error } from "../../components/shared/Notification";
 
 import { useLocation } from "react-router-dom";
@@ -13,11 +12,9 @@ import TitleCard from "../../components/shared/TitleCard";
 import LaporanHarianDetailTable from "../../components/Laporan/Harian/LaporanHarianDetail.table";
 
 const LaporanHarianDetail = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const location = useLocation();
 
-  const { jurnal, auth } = useSelector((state) => state);
+  const { auth } = useSelector((state) => state);
 
   const { waktu } = location.state;
   const [harianData, setHarianData] = React.useState(null);
@@ -25,7 +22,10 @@ const LaporanHarianDetail = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`laporan-harian-data/${waktu}`)
+      await getDataAPI(
+        `laporan-harian-data/${waktu}`,
+        `bearer ${auth?.auth?.access_token}`
+      )
         .then((response) => {
           let data = response?.data?.response?.data;
           const totalArr = data?.map((item) => {

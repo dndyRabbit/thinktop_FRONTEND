@@ -13,18 +13,23 @@ import TitleCard from "../../components/shared/TitleCard";
 import { error } from "../../components/shared/Notification";
 import { getDataAPI } from "../../core/utils/fetchData";
 import LaporanBulananWaktuTable from "../../components/Laporan/Bulanan/LaporanBulananWaktu.table";
+import { useSelector } from "react-redux";
 
 const LaporanBulananPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { api, path } = location.state;
+  const { auth } = useSelector((state) => state);
 
   const [bulananWaktu, setBulananWaktu] = React.useState(null);
   const [filterDataByDate, setFilterDataByDate] = React.useState(dayjs());
 
   const fetchDatas = async () => {
-    await getDataAPI(`${api}/${filterDataByDate.$y}`)
+    await getDataAPI(
+      `${api}/${filterDataByDate.$y}`,
+      `bearer ${auth?.auth?.access_token}`
+    )
       .then((response) => {
         setBulananWaktu(response?.data?.response);
       })

@@ -52,6 +52,7 @@ const TambahPembelianPage = () => {
           newData,
           setData,
           initialState,
+          token: `bearer ${auth?.auth?.access_token}`,
         })
       );
     }

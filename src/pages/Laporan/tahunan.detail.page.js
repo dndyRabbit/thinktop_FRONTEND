@@ -16,9 +16,8 @@ import TitleCard from "../../components/shared/TitleCard";
 import LaporanTahunanDetailTable from "../../components/Laporan/Tahunan/LaporanTahunanDetail.table";
 
 const LaporanTahunanDetail = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const location = useLocation();
+  const { auth } = useSelector((state) => state);
 
   const { waktu } = location.state;
   const [tahunanData, setTahunanData] = React.useState(null);
@@ -26,7 +25,10 @@ const LaporanTahunanDetail = () => {
 
   useEffect(() => {
     const fetchDatas = async () => {
-      await getDataAPI(`laporan-tahunan-data/${waktu}`)
+      await getDataAPI(
+        `laporan-tahunan-data/${waktu}`,
+        `bearer ${auth?.auth?.access_token}`
+      )
         .then((response) => {
           let data = response?.data?.response?.data;
           const totalArr = data?.map((item) => {

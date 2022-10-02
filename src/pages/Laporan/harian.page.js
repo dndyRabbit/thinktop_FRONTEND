@@ -13,18 +13,23 @@ import TitleCard from "../../components/shared/TitleCard";
 import LaporanHarianWaktuTable from "../../components/Laporan/Harian/LaporanHarianWaktu.table";
 import { error } from "../../components/shared/Notification";
 import { getDataAPI } from "../../core/utils/fetchData";
+import { useSelector } from "react-redux";
 
 const LaporanHarianPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { api, path } = location.state;
+  const { auth } = useSelector((state) => state);
 
   const [harianDatas, setHarianDatas] = React.useState(null);
   const [filterDataByDate, setFilterDataByDate] = React.useState(dayjs());
 
   const fetchDatas = async () => {
-    await getDataAPI(`${api}/${filterDataByDate.$d}`)
+    await getDataAPI(
+      `${api}/${filterDataByDate.$d}`,
+      `bearer ${auth?.auth?.access_token}`
+    )
       .then((response) => {
         setHarianDatas(response?.data?.response);
       })
