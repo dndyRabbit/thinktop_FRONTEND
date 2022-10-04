@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import akun from "./akun.reducer";
 import product from "./product.reducer";
 import pembelian from "./pembelian.reducer";
+import karyawan from "./karyawan.reducer";
 import auth from "./auth.reducer";
 
 export default combineReducers({
@@ -10,4 +11,5 @@ export default combineReducers({
   auth,
   product,
   pembelian,
+  karyawan,
 });

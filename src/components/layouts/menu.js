@@ -34,6 +34,13 @@ const Menu = [
     icon: "DashboardSVG",
     children: null,
   },
+  {
+    path: "/karyawan",
+    parent: "karyawan",
+    title: "Karyawan",
+    icon: "DashboardSVG",
+    children: null,
+  },
 ];
 
 export default Menu;

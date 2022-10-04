@@ -20,6 +20,8 @@ import LaporanBulananPage from "../../pages/Laporan/bulanan.page";
 import LaporanBulananDetail from "../../pages/Laporan/bulanan.detail.page";
 import LaporanTahunanPage from "../../pages/Laporan/tahunan.page";
 import LaporanTahunanDetail from "../../pages/Laporan/tahunan.detail.page";
+import KaryawanPage from "../../pages/karyawan";
+import TambahKaryawanPage from "../../pages/karyawan/tambahKaryawan.page";
 
 const MainRoutes = () => {
   return (
@@ -49,6 +51,8 @@ const MainRoutes = () => {
             path="laporan/tahunan/:waktu"
             element={<LaporanTahunanDetail />}
           />
+          <Route path="karyawan" element={<KaryawanPage />} />
+          <Route path="karyawan/tambah" element={<TambahKaryawanPage />} />
         </Route>
 
         <Route path="/login" element={<LoginPage />} />
