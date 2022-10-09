@@ -15,7 +15,7 @@ function ProductPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { product } = useSelector((state) => state);
+  const { product, auth } = useSelector((state) => state);
 
   const handleDelete = async ({ uuid_product }) => {
     await confirmation(
@@ -23,7 +23,12 @@ function ProductPage() {
       "Data tidak bisa dikembalikan!"
     ).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteProduct({ uuid_product }));
+        dispatch(
+          deleteProduct({
+            uuid_product,
+            token: `bearer ${auth?.auth?.access_token}`,
+          })
+        );
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });

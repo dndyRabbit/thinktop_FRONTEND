@@ -11,6 +11,7 @@ const LaporanHarianDetailTable = ({
   total,
   handleDeleteJurnal,
 }) => {
+  console.log(harianData);
   return (
     <CardContent>
       <TableWrapper headers={harianData?.head} align="center">

@@ -75,7 +75,7 @@ export const getProduct = (token) => async (dispatch) => {
 };
 
 export const deleteProduct =
-  ({ uuid_product }) =>
+  ({ uuid_product, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -83,7 +83,7 @@ export const deleteProduct =
         payload: { loading: true },
       });
 
-      await deleteDataAPI(`product/${uuid_product}`);
+      await deleteDataAPI(`product/${uuid_product}`, token);
 
       dispatch({
         type: PRODUCT_TYPES.DELETE_PRODUCT,

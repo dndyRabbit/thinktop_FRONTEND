@@ -23,7 +23,7 @@ function AkunPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { akun } = useSelector((state) => state);
+  const { akun, auth } = useSelector((state) => state);
 
   const handleDelete = async ({ uuid_akun }) => {
     await confirmation(
@@ -31,7 +31,9 @@ function AkunPage() {
       "Data tidak bisa dikembalikan!"
     ).then((result) => {
       if (result.isConfirmed) {
-        dispatch(deleteAkun({ uuid_akun }));
+        dispatch(
+          deleteAkun({ uuid_akun, token: `bearer ${auth?.auth?.access_token}` })
+        );
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });

@@ -47,6 +47,7 @@ const TambahPembelianPage = () => {
         ...data,
         waktu: removeTime(waktu.$d),
       };
+      console.log(newData);
       dispatch(
         postPembelian({
           newData,

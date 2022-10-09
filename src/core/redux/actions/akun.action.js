@@ -72,7 +72,7 @@ export const getAkun = (token) => async (dispatch) => {
 };
 
 export const deleteAkun =
-  ({ uuid_akun }) =>
+  ({ uuid_akun, token }) =>
   async (dispatch) => {
     try {
       dispatch({
@@ -80,7 +80,7 @@ export const deleteAkun =
         payload: { loading: true },
       });
 
-      await deleteDataAPI(`akun/${uuid_akun}`);
+      await deleteDataAPI(`akun/${uuid_akun}`, token);
 
       dispatch({
         type: AKUN_TYPES.DELETE_AKUN,
