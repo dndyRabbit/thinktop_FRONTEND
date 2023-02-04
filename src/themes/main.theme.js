@@ -18,6 +18,18 @@ let theme = createTheme({
     },
   },
   components: {
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          background: "#00479B",
+          color: 'white',
+          "& .MuiListItemIcon-root": {
+            color: "inherit",
+            minWidth: '35px'
+          }
+        }
+      }
+    },
     MuiButton: {
       styleOverrides: {
         root: {
