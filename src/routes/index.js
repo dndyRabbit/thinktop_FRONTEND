@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import OuterLayouts from "../components/layouts/OuterLayout";
 import DashboardLayouts from "../components/layouts";
 import { Login, Dashboard } from "../pages";
+import produkRoute from "./produk";
 
 const routes = () => [
   {
@@ -9,6 +10,7 @@ const routes = () => [
     element: <DashboardLayouts />,
     children: [
       {path: 'dashboard', element: <Dashboard />},
+      ...produkRoute
     ]
   },
   {

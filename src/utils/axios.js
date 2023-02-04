@@ -1,12 +1,13 @@
 import axios from "axios";
 import {get} from "lodash";
+import jwt from "./jwt";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.interceptors.request.use(
   async (response) => {
     let originalConfig = response;
-    const userToken = localStorage.getItem("token");
-    const _token = userToken !== undefined ? JSON.parse(userToken) : null;
+    const userToken = jwt.getToken();
+    const _token = userToken !== undefined ? userToken : null;
     if (_token) originalConfig.headers.Authorization = `Bearer ${_token?.access_token}`;
     originalConfig.headers['Access-Control-Allow-Origin'] = '*';
     originalConfig.headers['Content-Type'] = 'application/json';

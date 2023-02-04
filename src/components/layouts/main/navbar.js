@@ -1,10 +1,14 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { Box, Tooltip } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Tooltip,
+  AppBar,
+  IconButton,
+  Toolbar,
+  Typography
+} from "@mui/material";
 import { useSelector } from "react-redux";
 
 function Navbar(props) {
@@ -42,7 +46,7 @@ function Navbar(props) {
             <Box
               sx={{ display: "flex", alignItems: "center", cursor: "pointer" }}
             >
-              {/* <Avatar alt="Remy Sharp" src={DefaultProfiles} /> */}
+              <Avatar alt="Remy Sharp" />
               <Box sx={{ ml: 1 }}>
                 <Box component="h5" sx={{ my: 0 }}>
                   {auth?.auth?.data?.full_name}

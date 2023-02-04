@@ -8,28 +8,28 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 
 const Menu = [
   {
-    path: "/",
-    parent: "/",
+    path: "/app/dashbard",
+    parent: "dashboard",
     title: "Beranda",
     icon: <DashboardRoundedIcon />,
     children: null,
   },
   {
-    path: "/produk",
+    path: "/app/produk",
     parent: "produk",
     title: "Produk",
     icon: <InventoryRoundedIcon />,
     children: null,
   },
   {
-    path: "/akun",
+    path: "/app/akun",
     parent: "akun",
     title: "Akun",
     icon: <AccountBalanceWalletRoundedIcon />,
     children: null,
   },
   {
-    path: "/pembelian",
+    path: "/app/pembelian",
     parent: "pembelian",
     title: "Pembelian",
     icon: <ShoppingBagRoundedIcon />,

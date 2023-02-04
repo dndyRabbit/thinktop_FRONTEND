@@ -12,6 +12,9 @@ let theme = createTheme({
     secondary: {
       main: '#ffffff',
     },
+    danger: {
+      main: '#e74c3c'
+    },
     text: {
       primary: colors.blueGrey[900],
       secondary: colors.blueGrey[600],
@@ -81,7 +84,7 @@ let theme = createTheme({
     fontFamily: ['Roboto', 'sans-serif'].join(','),
     button: {
       textTransform: 'capitalize',
-      fontSize: '18px',
+      // fontSize: '18px',
     },
   },
 });

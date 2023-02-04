@@ -21,6 +21,7 @@ function DrawerApp(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const urlPath = pathname.split("/");
+  console.log(urlPath, "URL PATH");
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {

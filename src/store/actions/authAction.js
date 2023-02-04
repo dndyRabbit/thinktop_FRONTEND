@@ -1,6 +1,7 @@
 import TYPES from "../types/authTypes";
 import axios from "../../utils/axios";
 import toast from "react-hot-toast";
+import jwt from "../../utils/jwt";
 
 /**
  * Action Login
@@ -16,7 +17,8 @@ export const doLogin = (body) => async (dispatch) => {
     });
     const response = await axios.post("login", {email, password});
     const {access_token = null, refresh_token = null, data = null} = response?.data?.response;
-    localStorage.setItem("token", JSON.stringify({access_token, refresh_token}));
+    jwt.setToken({access_token, refresh_token});
+    jwt.setProfile(data);
     dispatch({
       type: TYPES.SET_TOKEN,
       payload: {access_token, refresh_token}
