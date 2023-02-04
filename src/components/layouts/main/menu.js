@@ -8,7 +8,7 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 
 const Menu = [
   {
-    path: "/app/dashbard",
+    path: "/app/dashboard",
     parent: "dashboard",
     title: "Beranda",
     icon: <DashboardRoundedIcon />,

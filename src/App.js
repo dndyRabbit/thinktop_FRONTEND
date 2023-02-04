@@ -5,7 +5,6 @@ import allRoutes from "./routes";
 import DataProvider from "./store";
 import {Toaster} from "react-hot-toast";
 import { useEffect, useState } from "react";
-import _ from "lodash";
 
 function App() {
   /**
@@ -23,14 +22,15 @@ function App() {
   }, [auth]);
 
   async function requestAuth() {
+    console.log("App : Initial Request Auth");
     const token = localStorage.getItem('token');
-    setAuth(_.isUndefined(token) || _.isEmpty(token));
+    setAuth(token ? true : false);
   }
 
   /**
    * Konfigurasi Routing
    */
-  const routes = useRoutes(allRoutes());
+  const routes = useRoutes(allRoutes(auth));
   return (
     <DataProvider>
       <ThemeProvider theme={mainTheme}>

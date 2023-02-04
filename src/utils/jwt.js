@@ -1,9 +1,11 @@
 export const setProfile = (data) => {
-  return localStorage.setItem('x-tt-profiles', data);
+  return localStorage.setItem('x-tt-profiles', JSON.stringify(data));
 };
 
 export const getProfile = () => {
-  return localStorage.getItem('x-tt-profiles');
+  const profiles = localStorage.getItem('x-tt-profiles');
+  if (profiles) return JSON.parse(profiles);
+  else return null; 
 };
 
 export const setToken = (data) => {

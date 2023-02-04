@@ -13,8 +13,31 @@ import {
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRounded";
 import Table from "../../components/table";
+import Swal from "sweetalert2";
 
 export default function Produk() {
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: 'Apakah Anda yakin ingin menghapus produk?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yakin',
+      cancelButtonText: 'Batalkan',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+  };
+
   return (
     <Box marginTop={2}>
       <Grid
@@ -59,7 +82,7 @@ export default function Produk() {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Hapus">
-                    <IconButton aria-label="delete" color="error">
+                    <IconButton aria-label="delete" color="error" onClick={handleDelete}>
                       <DeleteRoundedIcon />
                     </IconButton>
                   </Tooltip>
