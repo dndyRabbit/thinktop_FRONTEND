@@ -1,14 +1,14 @@
 import { Navigate } from "react-router-dom";
 import OuterLayouts from "../components/layouts/OuterLayout";
 import DashboardLayouts from "../components/layouts";
-import { Login } from "../pages";
+import { Login, Dashboard } from "../pages";
 
 const routes = () => [
   {
     path: "app",
     element: <DashboardLayouts />,
     children: [
-      {path: 'dashboard', element: <>DASHBOARD APP</>},
+      {path: 'dashboard', element: <Dashboard />},
     ]
   },
   {
