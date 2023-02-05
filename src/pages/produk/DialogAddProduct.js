@@ -23,8 +23,7 @@ export default function DialogAddProduct({ handleClose, show, data }) {
 
   const handleSave = async () => {
     try {
-      dispatch(postProduk());
-      handleClose();
+      dispatch(postProduk(handleClose));
     } catch (errors) {
       return errors;
     }

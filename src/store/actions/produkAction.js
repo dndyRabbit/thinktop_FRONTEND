@@ -30,21 +30,34 @@ export const getProduk = (params) => async (dispatch) => {
   }
 };
 
-export const postProduk = () => async (dispatch, getState) => {
+export const postProduk = (handleClose) => async (dispatch, getState) => {
   try {
     dispatch({ type: produkTypes.REQUEST_POST_PRODUK });
     const {
       produk: { form = {} },
     } = getState();
-    const response = await axios[form.uuid ? 'put' : 'post'](form.uuid ? `product/${form.uuid}` : "product", form);
+    for (const key in form) {
+      if (key === "uuid") continue;
+      if (form[key] === "" || form[key] === 0 || form[key] === "0") {
+        toast.error(`${key} wajib diisi.`, {
+          position: "top-right",
+        });
+        throw Error(`${key} wajib diisi.`);
+      }
+    }
+    const response = await axios[form.uuid ? "put" : "post"](
+      form.uuid ? `product/${form.uuid}` : "product",
+      form
+    );
     dispatch(getProduk());
-    toast.success(`Berhasil ${form.uuid ? 'edit data' : 'menyimpan'} produk`, {
+    toast.success(`Berhasil ${form.uuid ? "edit data" : "menyimpan"} produk`, {
       position: "top-right",
     });
     dispatch({ type: produkTypes.REQUEST_POST_PRODUK_SUCCESS });
+    handleClose();
     return response;
   } catch (errors) {
-    dispatch({ type: produkTypes.REQUEST_POST_PRODUK_SUCCESS });
+    dispatch({ type: produkTypes.REQUEST_POST_PRODUK_FAILURE });
     return errors;
   }
 };
