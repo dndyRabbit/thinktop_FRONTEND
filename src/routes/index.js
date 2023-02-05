@@ -3,6 +3,7 @@ import OuterLayouts from "../components/layouts/OuterLayout";
 import DashboardLayouts from "../components/layouts";
 import { Login, Dashboard } from "../pages";
 import produkRoute from "./produk";
+import akunRoute from "./akun";
 
 const routes = (isLoggedIn) => [
   {
@@ -10,7 +11,8 @@ const routes = (isLoggedIn) => [
     element: isLoggedIn ? <DashboardLayouts /> : <Navigate to="/login" />,
     children: [
       {path: 'dashboard', element: <Dashboard />},
-      ...produkRoute
+      ...produkRoute,
+      ...akunRoute
     ]
   },
   {

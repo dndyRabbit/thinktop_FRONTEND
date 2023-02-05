@@ -52,6 +52,14 @@ const akunReducer = (state = initialState, action) => {
         },
         dataAkun: action?.payload ?? []
       };
+    case akunTypes.SET_FORM:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          ...action?.payload
+        }
+      }
     default:
       return state;
   }
