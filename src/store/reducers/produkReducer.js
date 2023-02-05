@@ -7,7 +7,7 @@ const initialState = {
     uuid: undefined,
     product_name: '',
     price: 0,
-    description: 0,
+    description: '',
     stock: 0
   },
   loadingPostProduct: false
@@ -38,6 +38,28 @@ const produkReducer = (state = initialState, action) => {
           description: 0,
           stock: 0
         }
+      };
+    case produkTypes.REQUEST_POST_PRODUK:
+      return {
+        ...state,
+        loadingPostProduct: true
+      };
+    case produkTypes.REQUEST_POST_PRODUK_FAILURE:
+      return {
+        ...state,
+        loadingPostProduct: false
+      };
+    case produkTypes.REQUEST_POST_PRODUK_SUCCESS:
+      return {
+        ...state,
+        loadingPostProduct: false,
+        form: {
+          uuid: undefined,
+          product_name: '',
+          price: 0,
+          description: '',
+          stock: 0
+        },
       }
     default:
       return state;

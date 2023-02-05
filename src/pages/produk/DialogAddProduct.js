@@ -10,8 +10,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { postProduk } from "../../store/actions/produkAction";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -19,27 +19,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogAddProduct({ handleClose, show, data }) {
   const dispatch = useDispatch();
+  const { form, loadingPostProduct } = useSelector((state) => state.produk);
 
-  const [form, setForm] = React.useState({
-    uuid: undefined,
-    product_name: '',
-    price: 0,
-    description: '',
-    stock: 0
-  });
-
-  React.useEffect(() => {
-    if (!data || Array.isArray(data)) return;
-    for (const key in data) {
-      setForm((old) => ({...old, key: data[key]}));
+  const handleSave = async () => {
+    try {
+      dispatch(postProduk());
+      handleClose();
+    } catch (errors) {
+      return errors;
     }
-  }, []);
-
-  const handleSave = () => {
-    toast.error('Gagal menyimpan produk', {
-      position: 'top-right'
-    });
-  }
+  };
   return (
     <Dialog
       open={show}
@@ -70,7 +59,12 @@ export default function DialogAddProduct({ handleClose, show, data }) {
               placeholder="Contoh: Coffee Latte"
               autoFocus
               value={form.product_name}
-              onChange={(e) => dispatch({type: 'produk/setForm', payload: {product_name: e.value}})}
+              onChange={(e) =>
+                dispatch({
+                  type: "produk/setForm",
+                  payload: { product_name: e.target.value },
+                })
+              }
             />
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -94,7 +88,12 @@ export default function DialogAddProduct({ handleClose, show, data }) {
               maxRows={5}
               rows={4}
               value={form.description}
-              onChange={(e) => dispatch({type: 'produk/setForm', payload: {description: e.value}})}
+              onChange={(e) =>
+                dispatch({
+                  type: "produk/setForm",
+                  payload: { description: e.target.value },
+                })
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
@@ -120,7 +119,12 @@ export default function DialogAddProduct({ handleClose, show, data }) {
                 ),
               }}
               value={form.price}
-              onChange={(e) => dispatch({type: 'produk/setForm', payload: {price: e.value}})}
+              onChange={(e) =>
+                dispatch({
+                  type: "produk/setForm",
+                  payload: { price: e.target.value },
+                })
+              }
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
@@ -141,7 +145,13 @@ export default function DialogAddProduct({ handleClose, show, data }) {
               id="stock"
               name="stock"
               value={form.stock}
-              onChange={(e) => dispatch({type: 'produk/setForm', payload: {stock: e.value}})}
+              onChange={(e) =>
+                dispatch({
+                  type: "produk/setForm",
+                  payload: { stock: e.target.value },
+                })
+              }
+              disabled={loadingPostProduct}
             />
           </Grid>
         </Grid>
@@ -153,6 +163,7 @@ export default function DialogAddProduct({ handleClose, show, data }) {
           variant="contained"
           disableElevation
           color="success"
+          disabled={loadingPostProduct}
         >
           Simpan
         </Button>
