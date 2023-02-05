@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { deleteProduk, getProduk } from "../../store/actions/produkAction";
 import DialogAddProduct from "./DialogAddProduct";
 import produkTypes from "../../store/types/produkTypes";
+import { convertPrice } from "../../utils/currency";
 export default function Produk() {
   const { produk } = useSelector((state) => state);
   const [showDialogAddProduct, setShowDialogAddProduct] = useState(false);
@@ -97,7 +98,7 @@ export default function Produk() {
                   <TableCell>{key + 1}</TableCell>
                   <TableCell>{data?.product_name}</TableCell>
                   <TableCell>{data?.description}</TableCell>
-                  <TableCell>{data?.price}</TableCell>
+                  <TableCell>Rp {convertPrice(data?.price)}</TableCell>
                   <TableCell>
                     <Tooltip title="Edit">
                       <IconButton aria-label="edit" onClick={() => handleEdit(data)}>
