@@ -4,6 +4,7 @@ import DashboardLayouts from "../components/layouts";
 import { Login, Dashboard } from "../pages";
 import produkRoute from "./produk";
 import akunRoute from "./akun";
+import pembelianRoute from "./pembelian";
 
 const routes = (isLoggedIn) => [
   {
@@ -12,7 +13,8 @@ const routes = (isLoggedIn) => [
     children: [
       {path: 'dashboard', element: <Dashboard />},
       ...produkRoute,
-      ...akunRoute
+      ...akunRoute,
+      ...pembelianRoute
     ]
   },
   {
