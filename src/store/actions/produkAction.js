@@ -31,11 +31,10 @@ export const getProduk = (params) => async (dispatch) => {
 
 export const postProduk = () => async (getState, dispatch) => {
   try {
-    const {produk} = getState();
-    console.log(produk, "PRODUCT DATA");
-    const response = await axios.post("product", produk?.form);
+    const {produk: {form = {}}} = getState();
+    const response = await axios.post("product", form);
     return response;
   } catch (errors) {
     return errors;
   }
-}
+};
