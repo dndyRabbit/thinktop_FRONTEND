@@ -109,7 +109,7 @@ export default function DialogAddAkun({ handleClose, show, data }) {
                 Biaya Operasional
               </MenuItem>
               <MenuItem value={"revenue"}>Pendapatan</MenuItem>
-              <MenuItem value={"const_of_sales"}>Biaya Penjualan</MenuItem>
+              <MenuItem value={"cost_of_sales"}>Biaya Penjualan</MenuItem>
               <MenuItem value={"etc"}>Lainnya</MenuItem>
             </Select>
           </Grid>
