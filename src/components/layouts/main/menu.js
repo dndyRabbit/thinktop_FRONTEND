@@ -36,14 +36,14 @@ const Menu = [
     children: null,
   },
   {
-    path: "/biaya",
+    path: "/app/biaya",
     parent: "biaya",
     title: "Biaya",
     icon: <PaymentsRoundedIcon />,
     children: null,
   },
   {
-    path: "/laporan",
+    path: "/app/laporan",
     parent: "laporan",
     title: "Laporan",
     icon: <ReceiptLongRoundedIcon />,

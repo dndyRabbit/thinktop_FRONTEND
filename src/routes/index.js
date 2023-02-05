@@ -5,6 +5,7 @@ import { Login, Dashboard } from "../pages";
 import produkRoute from "./produk";
 import akunRoute from "./akun";
 import pembelianRoute from "./pembelian";
+import laporanRoute from "./laporan";
 
 const routes = (isLoggedIn) => [
   {
@@ -14,7 +15,8 @@ const routes = (isLoggedIn) => [
       {path: 'dashboard', element: <Dashboard />},
       ...produkRoute,
       ...akunRoute,
-      ...pembelianRoute
+      ...pembelianRoute,
+      ...laporanRoute
     ]
   },
   {

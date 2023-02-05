@@ -4,11 +4,13 @@ import produk from "./produkReducer";
 import akun from "./akunReducer";
 import pembelian from "./pembelianReducer";
 import dashboard from "./dashboard";
+import laporan from "./laporanReducer";
 
 export default combineReducers({
   auth,
   produk,
   akun,
   pembelian,
-  dashboard
+  dashboard,
+  laporan
 });
