@@ -8,7 +8,21 @@ const initialState = {
   loading: {
     request: false
   },
-  data: []
+  data: [],
+  laba: {
+    revenue: {
+      data: [],
+      total: 0,
+    },
+    expense: {
+      total: 0,
+      data: [],
+    },
+    cos: {
+      total: 0,
+      data: [],
+    },
+  }
 };
 
 export const laporanReducer = (state = initialState, action) => {
@@ -28,7 +42,21 @@ export const laporanReducer = (state = initialState, action) => {
           ...state.loading,
           request: true
         },
-        data: []
+        data: [],
+        laba: {
+          revenue: {
+            data: [],
+            total: 0,
+          },
+          expense: {
+            total: 0,
+            data: [],
+          },
+          cos: {
+            total: 0,
+            data: [],
+          },
+        }
       };
     }
     case laporanTypes.ON_REQUEST_SUCCESS: {
@@ -48,8 +76,31 @@ export const laporanReducer = (state = initialState, action) => {
           ...state.loading,
           request: false
         },
-        data: []
+        data: [],
+        laba: {
+          revenue: {
+            data: [],
+            total: 0,
+          },
+          expense: {
+            total: 0,
+            data: [],
+          },
+          cos: {
+            total: 0,
+            data: [],
+          },
+        }
       };
+    }
+    case laporanTypes.SET_DATA_LABA: {
+      return {
+        ...state,
+        laba: {
+          ...state.laba,
+          ...action?.payload
+        }
+      }
     }
     default:
       return state;

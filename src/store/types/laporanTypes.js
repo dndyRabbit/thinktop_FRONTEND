@@ -4,6 +4,7 @@ export const laporanTypes = {
   ON_REQUEST_FETCH: 'laporan/onRequestFetch',
   ON_REQUEST_FAILURE: 'laporan/onRequestFailure',
   ON_REQUEST_SUCCESS: 'laporan/onRequestSuccess',
+  SET_DATA_LABA: 'laporan/setDataLaba'
 };
 
 export default laporanTypes;
