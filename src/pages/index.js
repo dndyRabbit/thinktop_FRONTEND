@@ -4,6 +4,7 @@ import Produk from "./produk";
 import Akun from "./akun";
 import Pembelian from "./pembelian";
 import Laporan from "./laporan";
+import Biaya from "./biaya";
 
 export {
   Login,
@@ -11,5 +12,6 @@ export {
   Produk,
   Akun,
   Pembelian,
-  Laporan
+  Laporan,
+  Biaya
 };

@@ -6,6 +6,7 @@ import produkRoute from "./produk";
 import akunRoute from "./akun";
 import pembelianRoute from "./pembelian";
 import laporanRoute from "./laporan";
+import biayaRoute from "./biaya";
 
 const routes = (isLoggedIn) => [
   {
@@ -16,7 +17,8 @@ const routes = (isLoggedIn) => [
       ...produkRoute,
       ...akunRoute,
       ...pembelianRoute,
-      ...laporanRoute
+      ...laporanRoute,
+      ...biayaRoute
     ]
   },
   {
