@@ -6,6 +6,7 @@ import pembelian from "./pembelianReducer";
 import dashboard from "./dashboard";
 import laporan from "./laporanReducer";
 import biaya from "./biayaReducer";
+import karyawan from "./karyawanReducer";
 
 export default combineReducers({
   auth,
@@ -14,5 +15,6 @@ export default combineReducers({
   pembelian,
   dashboard,
   laporan,
-  biaya
+  biaya,
+  karyawan
 });

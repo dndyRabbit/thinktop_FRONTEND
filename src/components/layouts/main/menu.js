@@ -50,7 +50,7 @@ const Menu = [
     children: null,
   },
   {
-    path: "/karyawan",
+    path: "/app/karyawan",
     parent: "karyawan",
     title: "Karyawan",
     icon: <PeopleRoundedIcon />,
