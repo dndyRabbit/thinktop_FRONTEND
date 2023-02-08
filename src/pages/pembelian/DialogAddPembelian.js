@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  InputAdornment,
   Grid,
   Slide,
   TextField,
@@ -13,9 +12,7 @@ import {
   MenuItem
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { getProduk } from "../../store/actions/produkAction";
 import {postPembelian} from "../../store/actions/pembelianAction";
-import { getAkun } from "../../store/actions/akunAction";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -23,7 +20,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogAddPembelian({ handleClose, show, data }) {
   const dispatch = useDispatch();
-  const { form } = useSelector((state) => state.pembelian);
+  const { form, loading } = useSelector((state) => state.pembelian);
   const { akun, produk } = useSelector((state) => state);
 
   const handleSave = async () => {
@@ -33,11 +30,6 @@ export default function DialogAddPembelian({ handleClose, show, data }) {
       return errors;
     }
   };
-
-  // React.useEffect(() => {
-  //   dispatch(getProduk());
-  //   dispatch(getAkun());
-  // }, []);
   return (
     <Dialog
       open={show}
@@ -134,6 +126,7 @@ export default function DialogAddPembelian({ handleClose, show, data }) {
       <DialogActions>
         <Button onClick={handleClose}>Batalkan</Button>
         <Button
+          disabled={loading.post}
           onClick={handleSave}
           variant="contained"
           disableElevation

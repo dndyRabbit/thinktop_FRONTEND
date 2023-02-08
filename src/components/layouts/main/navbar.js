@@ -37,7 +37,7 @@ function Navbar(props) {
             </IconButton>
           </Box>
           <Typography variant="h6" noWrap component="div">
-            {auth?.profile?.role === 2 ? "ADMIN" : "PEGAWAI"}
+            {/* {auth?.profile?.role === 2 ? "ADMIN" : "PEGAWAI"} */}
           </Typography>
         </Box>
         <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>

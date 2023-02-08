@@ -17,6 +17,7 @@ export const getPembelian = () => async (dispatch) => {
 
 export const postPembelian = (handleClose) => async (dispatch, getState) => {
   try {
+    dispatch({type: pembelianTypes.ON_POST_REQUEST});
     const {form} = getState().pembelian;
     let _form = {...form};
     _form.waktu = _form?.waktu ? _form?.waktu : new Date();
@@ -34,9 +35,11 @@ export const postPembelian = (handleClose) => async (dispatch, getState) => {
       position: "top-right",
     });
     dispatch(getPembelian());
+    dispatch({type: pembelianTypes.ON_POST_SUCCESS});
     handleClose();
     return response;
   } catch (errors) {
+    dispatch({type: pembelianTypes.ON_POST_FAILURE});
     return errors;
   }
 }

@@ -3,7 +3,8 @@ import pembelianTypes from "../types/pembelianTypes";
 export const initialState = {
   loading: {
     fetch: false,
-    delete: false
+    delete: false,
+    post: false
   },
   data: [],
   form: {
@@ -49,6 +50,37 @@ const pembelianReducer = (state = initialState, action) => {
           fetch: false
         },
         data: action?.payload ?? []
+      };
+    case pembelianTypes.ON_POST_REQUEST:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          post: true
+        },
+      };
+    case pembelianTypes.ON_POST_FAILURE:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          post: false
+        },
+      };
+    case pembelianTypes.ON_POST_SUCCESS:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          post: false
+        },
+        form: {
+          akun: '',
+          uuid_product: '',
+          waktu: '',
+          tipe: '',
+          quantity: 0
+        }
       };
     default:
       return state;
