@@ -13,7 +13,6 @@ import { useSelector } from "react-redux";
 
 function Navbar(props) {
   const { auth } = useSelector((state) => state);
-
   return (
     <AppBar
       position="fixed"
@@ -38,7 +37,7 @@ function Navbar(props) {
             </IconButton>
           </Box>
           <Typography variant="h6" noWrap component="div">
-            {auth?.auth?.data?.role === 2 ? "ADMIN" : "PEGAWAI"}
+            {auth?.profile?.role === 2 ? "ADMIN" : "PEGAWAI"}
           </Typography>
         </Box>
         <Box sx={{ flexGrow: 0, display: "flex", alignItems: "center" }}>
@@ -49,10 +48,10 @@ function Navbar(props) {
               <Avatar alt="Remy Sharp" />
               <Box sx={{ ml: 1 }}>
                 <Box component="h5" sx={{ my: 0 }}>
-                  {auth?.auth?.data?.full_name}
+                  {auth?.profile?.full_name}
                 </Box>
                 <Box component="span">
-                  {auth?.auth?.data?.role === 2 ? "ADMIN" : "PEGAWAI"}
+                  {auth?.profile?.role === 2 ? "ADMIN" : "PEGAWAI"}
                 </Box>
               </Box>
             </Box>

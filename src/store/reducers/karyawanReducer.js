@@ -4,6 +4,7 @@ const initialState = {
   data: [],
   loading: {
     getKaryawan: false,
+    postKaryawan: false
   },
   form: {
     full_name: null,
@@ -14,7 +15,7 @@ const initialState = {
     address: null,
     handphone: null,
     gender: null,
-    occupation: null,
+    occupation: '-',
     birthday: null,
   }
 };
@@ -55,7 +56,43 @@ const karyawanReducer = (state = initialState, action) => {
           ...state.form,
           ...action?.payload
         }
-      }
+      };
+    case karyawanTypes.ON_POST_REQUEST:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          postKaryawan: true
+        }
+      };
+    case karyawanTypes.ON_POST_FAILURE:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          postKaryawan: false
+        }
+      };
+    case karyawanTypes.ON_POST_SUCCESS:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          postKaryawan: false
+        },
+        form: {
+          full_name: null,
+          email: null,
+          password: null,
+          role: null,
+          nickname: null,
+          address: null,
+          handphone: null,
+          gender: null,
+          occupation: '-',
+          birthday: null,
+        }
+      };
     default:
       return state;
   }

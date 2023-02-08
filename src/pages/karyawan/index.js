@@ -5,16 +5,43 @@ import {
   Grid,
   Typography,
   Button,
+  TableRow,
+  TableCell,
+  Tooltip,
+  IconButton
 } from "@mui/material";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Table from "../../components/table";
-import { getKaryawan } from "../../store/actions/karyawanAction";
+import { deleteKaryawan, getKaryawan } from "../../store/actions/karyawanAction";
 import DialogAddKaryawan from "./DialogAddKaryawan";
+import Swal from "sweetalert2";
 
 export default function Karyawan() {
   const dispatch = useDispatch();
+  const {karyawan} = useSelector((state) => state);
   const [showDialogAddKaryawan, setShowDialogAddKaryawan] = useState(false);
+  const handleDelete = (data) => {
+    const { uuid = null } = data;
+    Swal.fire({
+      title: "Apakah Anda yakin ingin menghapus karyawan ini?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yakin",
+      cancelButtonText: "Batalkan",
+      allowOutsideClick: false,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await dispatch(deleteKaryawan(uuid));
+        if (res?.status === 200) {
+          Swal.fire("Dihapus!", "Karyawan telah dihapus.", "success");
+        }
+      }
+    });
+  };
   useEffect(() => {
     dispatch(getKaryawan());
   }, []);
@@ -53,9 +80,23 @@ export default function Karyawan() {
       <Card>
         <CardContent>
           <Table
-            headers={['No', 'Nama Lengkap', 'Aksi']}
+            headers={['No', 'Nama Lengkap', 'Jenis Kelamin', 'Alamat','Aksi']}
           >
-
+            {karyawan.data.map((data, key) => (
+              <TableRow key={key}>
+                <TableCell>{key + 1}</TableCell>
+                <TableCell>{data?.full_name}</TableCell>
+                <TableCell>{data?.personal_data?.gender === "P" ? "Perempuan" : "Laki - Laki"}</TableCell>
+                <TableCell>{data?.personal_data?.address}</TableCell>
+                <TableCell>
+                  <Tooltip title="Hapus">
+                    <IconButton aria-label="delete" color="error" onClick={() => handleDelete(data)}>
+                      <DeleteRoundedIcon />
+                    </IconButton>
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+            ))}
           </Table>
         </CardContent>
       </Card>

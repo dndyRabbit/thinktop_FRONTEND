@@ -46,6 +46,11 @@ function DrawerApp(props) {
     handleClick();
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   const drawer = (
     <div>
       <Toolbar sx={{ my: props.mobileOpen ? 0 : 4, mx: 5 }}>
@@ -110,7 +115,7 @@ function DrawerApp(props) {
           <Box
             component="div"
             sx={styleBoxMenu(false)}
-            // onClick={() => dispatch(logout())}
+            onClick={handleLogout}
           >
             <ListItemIcon>
               <LogoutIcon />

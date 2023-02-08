@@ -17,8 +17,9 @@ export const getKaryawan = () => async (dispatch) => {
   }
 };
 
-export const postKaryawan = () => async (dispatch, getState) => {
+export const postKaryawan = (handleClose) => async (dispatch, getState) => {
   try {
+    dispatch({type: karyawanTypes.ON_POST_REQUEST});
     const {form} = getState().karyawan;
     for (const key in form) {
       if (form[key] === null) {
@@ -29,6 +30,21 @@ export const postKaryawan = () => async (dispatch, getState) => {
       }
     };
     const response = await axios.post(`karyawan`, form);
+    dispatch(getKaryawan());
+    dispatch({type: karyawanTypes.ON_POST_SUCCESS});
+    toast.success('Berhasil menambahkan karyawan.', {position: 'top-right'});
+    handleClose();
+    return response;
+  } catch (errors) {
+    dispatch({type: karyawanTypes.ON_POST_FAILURE});
+    return errors;
+  }
+}
+
+export const deleteKaryawan = (id) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`karyawan/${id}`);
+    dispatch(getKaryawan());
     return response;
   } catch (errors) {
     return errors;

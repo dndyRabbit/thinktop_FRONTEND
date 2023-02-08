@@ -4,14 +4,18 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  InputAdornment,
   Grid,
   Slide,
   TextField,
   Typography,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { postProduk } from "../../store/actions/produkAction";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { postKaryawan } from "../../store/actions/karyawanAction";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -19,11 +23,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function DialogAddKaryawan({ handleClose, show, data }) {
   const dispatch = useDispatch();
-  const { form, loadingPostProduct } = useSelector((state) => state.produk);
+  const { form, loading } = useSelector((state) => state.karyawan);
 
   const handleSave = async () => {
     try {
-      dispatch(postProduk(handleClose));
+      dispatch(postKaryawan(handleClose));
     } catch (errors) {
       return errors;
     }
@@ -91,60 +95,39 @@ export default function DialogAddKaryawan({ handleClose, show, data }) {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
-            <Typography sx={{ fontSize: 15, mb: 1, fontWeight: "500" }}>
-              Tanggal Lahir
-            </Typography>
-            <TextField
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderRadius: 2,
-                  },
-                },
-              }}
-              variant="outlined"
-              required
-              fullWidth
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">Rp</InputAdornment>
-                ),
-              }}
-              value={form.price}
-              onChange={(e) =>
-                dispatch({
-                  type: "produk/setForm",
-                  payload: { price: e.target.value },
-                })
-              }
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <Typography sx={{ fontSize: 15, mb: 1, fontWeight: "500" }}>
+                Tanggal Lahir
+              </Typography>
+              <DatePicker
+                value={form.birthday}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+                onChange={(newValue) =>
+                  dispatch({
+                    type: "karyawan/setForm",
+                    payload: { birthday: newValue },
+                  })
+                }
+              />
+            </LocalizationProvider>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Typography sx={{ fontSize: 15, mb: 1, fontWeight: "500" }}>
               Jenis Kelamin
             </Typography>
-            <TextField
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderRadius: 2,
-                  },
-                },
-              }}
-              variant="outlined"
-              required
+            <Select
               fullWidth
-              id="stock"
-              name="stock"
-              value={form.stock}
+              value={form.gender}
               onChange={(e) =>
                 dispatch({
-                  type: "produk/setForm",
-                  payload: { stock: e.target.value },
+                  type: "karyawan/setForm",
+                  payload: { gender: e?.target?.value },
                 })
               }
-              disabled={loadingPostProduct}
-            />
+            >
+              <MenuItem value="L">Laki - Laki</MenuItem>
+              <MenuItem value="P">Perempuan</MenuItem>
+            </Select>
           </Grid>
           <Grid item xs={12} sm={6} md={6} lg={6}>
             <Typography sx={{ fontSize: 15, mb: 1, fontWeight: "500" }}>
@@ -185,6 +168,7 @@ export default function DialogAddKaryawan({ handleClose, show, data }) {
               variant="outlined"
               required
               fullWidth
+              type="email"
               value={form.email}
               onChange={(e) =>
                 dispatch({
@@ -233,6 +217,7 @@ export default function DialogAddKaryawan({ handleClose, show, data }) {
               variant="outlined"
               required
               fullWidth
+              type="password"
               value={form.password}
               onChange={(e) =>
                 dispatch({
@@ -241,6 +226,24 @@ export default function DialogAddKaryawan({ handleClose, show, data }) {
                 })
               }
             />
+          </Grid>
+          <Grid item xs={12} sm={6} md={6} lg={12}>
+            <Typography sx={{ fontSize: 15, mb: 1, fontWeight: "500" }}>
+              Role
+            </Typography>
+            <Select
+              fullWidth
+              value={form.role}
+              onChange={(e) =>
+                dispatch({
+                  type: "karyawan/setForm",
+                  payload: { role: e?.target?.value },
+                })
+              }
+            >
+              <MenuItem value="2">Admin</MenuItem>
+              <MenuItem value="1">Pegawai</MenuItem>
+            </Select>
           </Grid>
         </Grid>
       </DialogContent>
@@ -251,7 +254,7 @@ export default function DialogAddKaryawan({ handleClose, show, data }) {
           variant="contained"
           disableElevation
           color="success"
-          disabled={loadingPostProduct}
+          disabled={loading.postKaryawan}
         >
           Simpan
         </Button>
