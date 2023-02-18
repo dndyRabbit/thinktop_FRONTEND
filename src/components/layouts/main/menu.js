@@ -13,6 +13,7 @@ const Menu = [
     title: "Beranda",
     icon: <DashboardRoundedIcon />,
     children: null,
+    isAdmin: false,
   },
   {
     path: "/app/produk",
@@ -20,6 +21,7 @@ const Menu = [
     title: "Produk",
     icon: <InventoryRoundedIcon />,
     children: null,
+    isAdmin: false,
   },
   {
     path: "/app/akun",
@@ -27,6 +29,7 @@ const Menu = [
     title: "Akun",
     icon: <AccountBalanceWalletRoundedIcon />,
     children: null,
+    isAdmin: true,
   },
   {
     path: "/app/pembelian",
@@ -34,6 +37,7 @@ const Menu = [
     title: "Pembelian",
     icon: <ShoppingBagRoundedIcon />,
     children: null,
+    isAdmin: false,
   },
   {
     path: "/app/biaya",
@@ -41,6 +45,7 @@ const Menu = [
     title: "Biaya",
     icon: <PaymentsRoundedIcon />,
     children: null,
+    isAdmin: true,
   },
   {
     path: "/app/laporan",
@@ -48,6 +53,7 @@ const Menu = [
     title: "Laporan",
     icon: <ReceiptLongRoundedIcon />,
     children: null,
+    isAdmin: true,
   },
   {
     path: "/app/karyawan",
@@ -55,6 +61,7 @@ const Menu = [
     title: "Karyawan",
     icon: <PeopleRoundedIcon />,
     children: null,
+    isAdmin: true,
   },
 ];
 

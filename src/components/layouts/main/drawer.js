@@ -16,12 +16,23 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Menu from "./menu";
+import { useSelector } from "react-redux";
 
 function DrawerApp(props) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const urlPath = pathname.split("/");
   const [open, setOpen] = React.useState(false);
+  const {auth} = useSelector((state) => state);
+
+  const isAdmin = React.useMemo(() => {
+    return auth?.profile?.role === 2 ? true : false;
+  }, [auth]);
+
+  const FilterMenu = React.useMemo(() => {
+    if (isAdmin) return Menu;
+    return Menu.filter(el => el?.isAdmin === false);
+  }, [auth]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -66,7 +77,7 @@ function DrawerApp(props) {
         {props.mobileOpen && <Typography>NT</Typography>}
       </Toolbar>
       <List>
-        {Menu.map((text, index) => (
+        {FilterMenu.map((text, index) => (
           <div key={index}>
             <ListItem
               onClick={() =>

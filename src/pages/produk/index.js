@@ -16,15 +16,19 @@ import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRound
 import Table from "../../components/table";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { deleteProduk, getProduk } from "../../store/actions/produkAction";
 import DialogAddProduct from "./DialogAddProduct";
 import produkTypes from "../../store/types/produkTypes";
 import { convertPrice } from "../../utils/currency";
 export default function Produk() {
-  const { produk } = useSelector((state) => state);
+  const { produk, auth: {profile} } = useSelector((state) => state);
   const [showDialogAddProduct, setShowDialogAddProduct] = useState(false);
   const dispatch = useDispatch();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 2 ? true : false;
+  }, [profile]);
 
   useEffect(() => {
     dispatch(getProduk());
@@ -101,7 +105,7 @@ export default function Produk() {
                   <TableCell>Rp {convertPrice(data?.price)}</TableCell>
                   <TableCell>
                     <Tooltip title="Edit">
-                      <IconButton aria-label="edit" onClick={() => handleEdit(data)}>
+                      <IconButton  aria-label="edit" onClick={() => handleEdit(data)}>
                         <ModeEditOutlineRoundedIcon />
                       </IconButton>
                     </Tooltip>

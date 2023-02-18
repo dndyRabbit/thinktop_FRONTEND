@@ -43,6 +43,7 @@ export const postAkun = (handleClose) => async (dispatch, getState) => {
     handleClose();
     return response;
   } catch (errors) {
+    toast.error(errors?.response?.data?.err, {position: 'top-right'});
     dispatch({ type: akunTypes.POST_AKUN_FAILURE });
     return errors;
   }

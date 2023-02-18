@@ -16,15 +16,19 @@ import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRound
 import Table from "../../components/table";
 import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getAkun, deleteAkun } from "../../store/actions/akunAction";
 import DialogAddAkun from "./DialogAddAkun";
 import akunTypes from "../../store/types/akunTypes";
 
 export default function Akun() {
-  const { akun } = useSelector((state) => state);
+  const { akun, auth: {profile} } = useSelector((state) => state);
   const [showDialogAddAkun, setShowDialogAddAkun] = useState(false);
   const dispatch = useDispatch();
+
+  const isAdmin = useMemo(() => {
+    return profile?.role === 2 ? true : false;
+  }, [profile]);
 
   useEffect(() => {
     dispatch(getAkun());
@@ -79,14 +83,14 @@ export default function Akun() {
           justifyContent="end"
           display="flex"
         >
-          <Button
+          {isAdmin && <Button
             variant="contained"
             size="medium"
             disabled={akun.loading.getAkun}
             onClick={() => setShowDialogAddAkun(true)}
           >
             Tambah Akun
-          </Button>
+          </Button>}
         </Grid>
       </Grid>
       <Card>
@@ -101,6 +105,7 @@ export default function Akun() {
                   <TableCell>
                     <Tooltip title="Edit">
                       <IconButton
+                        disabled={!isAdmin}
                         aria-label="edit"
                         onClick={() => handleEdit(data)}
                       >
@@ -109,6 +114,7 @@ export default function Akun() {
                     </Tooltip>
                     <Tooltip title="Hapus">
                       <IconButton
+                        disabled={!isAdmin}
                         aria-label="delete"
                         color="error"
                         onClick={() => handleDelete(data)}

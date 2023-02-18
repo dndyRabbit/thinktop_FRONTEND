@@ -59,6 +59,28 @@ const akunReducer = (state = initialState, action) => {
           ...state.form,
           ...action?.payload
         }
+      };
+    case akunTypes.POST_AKUN_FAILURE:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          postAkun: false
+        }
+      };
+    case akunTypes.POST_AKUN_SUCCESS:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          postAkun: false
+        },
+        form: {
+          uuid: undefined,
+          kode_akun: '',
+          nama_akun: '',
+          kategori: '',
+        },
       }
     default:
       return state;
